@@ -23,7 +23,8 @@ class perceptronLayer:
         return sumInputs
 
     def getOutput(self):
-        return sigmoid(self.getSumInputs)
+        # return sigmoid(self.getSumInputs)
+        return self.getSumInputs
 
     def __str__(self):
         return f'This p.layer has {self.inputlist} \n ' \
