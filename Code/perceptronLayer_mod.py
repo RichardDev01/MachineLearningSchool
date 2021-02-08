@@ -1,17 +1,13 @@
 import input_mod as input
-import math
-
-
-def sigmoid(x):
-    return 1 / (1 + math.exp(-x))
 
 
 class perceptronLayer:
-    def __init__(self, inputlist: [input]):
+    def __init__(self, inputlist: [input], activationType: str = ""):
         self.inputlist = inputlist
+        self.activationType = activationType
 
     def setInputs(self, inputs: [input]):
-        self.inputlist = input
+        self.inputlist = inputs
 
     def addInput(self, input: input):
         self.inputlist.append(input)
@@ -23,10 +19,16 @@ class perceptronLayer:
         return sumInputs
 
     def getOutput(self):
-        # return sigmoid(self.getSumInputs)
-        return self.getSumInputs
+        return self.getSumInputs() > 0 # Stepper activation as boolean
+
+    def getInputString(self):
+        inputstring = ''
+        for inputs in self.inputlist:
+            inputstring = inputstring + (str(inputs))
+        return inputstring
+
 
     def __str__(self):
-        return f'This p.layer has {self.inputlist} \n ' \
-               f'and {self.getSumInputs()} as sum input \n' \
+        return f'This p.layer has: \n {self.getInputString()} \n ' \
+               f'and {self.getSumInputs().__str__()} as sum input \n' \
                f' and {self.getOutput()} as layer output '

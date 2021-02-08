@@ -1,17 +1,16 @@
 class InputNW:
-    def __init__(self, value, weight):
-        self.value = value
-        self.weight = weight
+    def __init__(self, inputlist: [[float]], bias: float = 0):
+        # Input list contain as first value the raw input and as 2nd value the weight of that value
+        self.inputlist = inputlist
+        self.bias = bias
 
     def getValue(self):
-        calculated_value = self.value * self.weight
-        return calculated_value
-
-    def setWeight(self, weight):
-        self.weight = weight
-
-    def setValue(self, value):
-        self.value = value
+        input_sum = 0
+        for inp in self.inputlist:
+            input_sum += inp[0] * inp[1]
+        input_sum += self.bias
+        return input_sum
 
     def __str__(self):
-        return f'This input had a value of {self.value} and a weight of {self.weight}'
+        return f'This input has {self.inputlist} as input' \
+               f'and input has {self.bias} as bias\n '
