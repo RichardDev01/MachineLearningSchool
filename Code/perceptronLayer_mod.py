@@ -1,8 +1,8 @@
-import input_mod as input
+import perceptron_mod as input
 
 
 class perceptronLayer:
-    def __init__(self, inputlist: [input], activationType: str = ""):
+    def __init__(self, inputlist: [input], activationType: str = "Stepper"):
         self.inputlist = inputlist
         self.activationType = activationType
 
@@ -19,7 +19,10 @@ class perceptronLayer:
         return sumInputs
 
     def getOutput(self):
-        return self.getSumInputs() > 0 # Stepper activation as boolean
+        if self.activationType == 'Sigmoid':
+            return 0 # nog maken
+        elif self.activationType == 'Stepper': return self.getSumInputs() > 0 # Stepper activation as boolean
+        else: return self.getSumInputs() > 0 # Stepper activation as boolean
 
     def getInputString(self):
         inputstring = ''
@@ -29,6 +32,6 @@ class perceptronLayer:
 
 
     def __str__(self):
-        return f'This p.layer has: \n {self.getInputString()} \n ' \
+        return f'p.layer has: \n {self.getInputString()} \n ' \
                f'and {self.getSumInputs().__str__()} as sum input \n' \
-               f' and {self.getOutput()} as layer output '
+               f' and {self.getOutput()} as layer output \n\n'

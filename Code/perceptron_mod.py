@@ -11,6 +11,9 @@ class InputNW:
         input_sum += self.bias
         return input_sum
 
+
+    
+
     def __str__(self):
         return f'This input has {self.inputlist} as input' \
-               f'and input has {self.bias} as bias\n '
+               f' and input has {self.bias} as bias\n '
