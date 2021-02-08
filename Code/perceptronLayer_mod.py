@@ -6,23 +6,18 @@ class perceptronLayer:
         self.inputlist = inputlist
         self.activationType = activationType
 
+
     def setInputs(self, inputs: [input]):
         self.inputlist = inputs
 
     def addInput(self, input: input):
         self.inputlist.append(input)
 
-    def getSumInputs(self):
-        sumInputs = 0
-        for input in self.inputlist:
-            sumInputs += input.getValue()
-        return sumInputs
-
-    def getOutput(self):
-        if self.activationType == 'Sigmoid':
-            return 0 # nog maken
-        elif self.activationType == 'Stepper': return self.getSumInputs() > 0 # Stepper activation as boolean
-        else: return self.getSumInputs() > 0 # Stepper activation as boolean
+    def activation_triggers(self):
+        outputlist = []
+        for perceptron in self.inputlist:
+            outputlist.append(perceptron.getOutput())
+        return outputlist
 
     def getInputString(self):
         inputstring = ''
@@ -33,5 +28,4 @@ class perceptronLayer:
 
     def __str__(self):
         return f'p.layer has: \n {self.getInputString()} \n ' \
-               f'and {self.getSumInputs().__str__()} as sum input \n' \
-               f' and {self.getOutput()} as layer output \n\n'
+               f'layer triggers{self.activation_triggers()} \n\n'

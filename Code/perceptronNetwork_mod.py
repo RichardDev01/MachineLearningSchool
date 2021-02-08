@@ -8,7 +8,7 @@ class PerceptronNetwork:
     def feed_forward(self):
         outputlist = []
         for perceptron in self.perceptronLayers:
-            outputlist.append(perceptron.getOutput())
+            outputlist.append(perceptron.activation_triggers())
         return outputlist
 
     def getlayersInfo(self):
