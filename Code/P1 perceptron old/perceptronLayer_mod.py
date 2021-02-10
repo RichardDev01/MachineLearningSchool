@@ -2,9 +2,10 @@ import perceptron_mod as input
 
 
 class perceptronLayer:
-    def __init__(self, inputlist: [input], activationType: str = "Stepper"):
+    def __init__(self, inputlist: [input], activationType: str = "Stepper", idLayer: str = "ND"):
         self.inputlist = inputlist
         self.activationType = activationType
+        self.idLayer = idLayer
 
 
     def setInputs(self, inputs: [input]):
@@ -28,4 +29,4 @@ class perceptronLayer:
 
     def __str__(self):
         return f'p.layer has: \n {self.getInputString()} \n ' \
-               f'layer triggers{self.activation_triggers()} \n\n'
+               f'layer triggers{self.activation_triggers()} \n'

@@ -18,4 +18,6 @@ class PerceptronNetwork:
         return inputstring
 
     def __str__(self):
-        return f'forwardfeed = {self.feed_forward()} '
+        return f'forwardfeed = {self.feed_forward()} ' \
+               f'layers = {self.getlayersInfo()}'
+
