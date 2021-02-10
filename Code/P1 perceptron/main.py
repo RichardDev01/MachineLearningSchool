@@ -12,10 +12,10 @@ def setupNetwork():
     inputE = im.InputNW(inputvaluelist=[0.5],inputWeight =[1])
 
     inputA2 = im.InputNW(inputvaluelist=[1],inputWeight =[1], bias=5)
-    inputB2 = im.InputNW(inputvaluelist=[0.5],inputWeight =[0.5])
+    inputB2 = im.InputNW(inputvaluelist=[1,1],inputWeight =[1,1], bias= -2)
     inputC2 = im.InputNW(inputvaluelist=[0.5],inputWeight =[0.5],bias=1)
     inputD2 = im.InputNW(inputvaluelist=[0],inputWeight =[1],bias=1)
-    inputE2 = im.InputNW(inputvaluelist=[1],inputWeight =[0.5],bias=-12)
+    inputE2 = im.InputNW(inputvaluelist=[1,0],inputWeight =[1,1], bias= -2)
 
     inputlist = [inputA,inputB,inputC,inputD,inputE]
     inputlist2 = [inputA2, inputB2, inputC2, inputD2, inputE2]

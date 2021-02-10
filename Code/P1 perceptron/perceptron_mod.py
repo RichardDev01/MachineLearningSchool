@@ -18,8 +18,8 @@ class InputNW:
     def getOutput(self):
         if self.activationType == 'Sigmoid':
             return 0 # nog maken
-        elif self.activationType == 'Stepper': return self.getValue() > 0 # Stepper activation as boolean
-        else: return self.getValue() > 0 # Stepper activation as boolean
+        elif self.activationType == 'Stepper': return self.getValue() >= 0 # Stepper activation as boolean
+        else: return self.getValue() >= 0 # Stepper activation as boolean
 
     def __str__(self):
         return f'This input has {self.inputlist} as input' \
