@@ -17,6 +17,10 @@ class perceptronLayer:
             outputlist.append(perceptron.getOutput())
         return outputlist
 
+    def giveInputs(self, inputvaluelist: [float]):
+        for perceptron in self.inputlist:
+            perceptron.activate(inputvaluelist)
+
     def getInputString(self):
         """
         This function is for debuging only, it prints al the inputs of the layers
@@ -27,5 +31,5 @@ class perceptronLayer:
         return inputstring
 
     def __str__(self):
-        return f'{self.idLayer}p.layer has: \n {self.getInputString()} \n ' \
+        return f'\n{self.idLayer} perceptron.layer has: \n {self.getInputString()} \n ' \
                f'layer triggers{self.activation_triggers()}'

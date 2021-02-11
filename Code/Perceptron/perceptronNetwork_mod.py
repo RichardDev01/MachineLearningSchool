@@ -5,14 +5,16 @@ class PerceptronNetwork:
     def __init__(self, perceptronLayers: [perceptronLayer]):
         self.perceptronLayers = perceptronLayers
 
-    def feed_forward(self):
+    def feed_forward(self, inputvaluelist: [float]):
         """
-        Currently, this function is not used corectly and needs to be chacged later
+        This function feed the input through till the beginning
         """
-        outputlist = []
-        for perceptron in self.perceptronLayers:
-            outputlist.append(perceptron.activation_triggers())
-        return outputlist
+        value = inputvaluelist
+        for layer in self.perceptronLayers:
+            layer.giveInputs(value)
+            value = layer.activation_triggers()
+
+        return value
 
     def getlayersInfo(self):
         """
@@ -24,5 +26,4 @@ class PerceptronNetwork:
         return inputstring
 
     def __str__(self):
-        return f'forwardfeed = {self.feed_forward()} \n' \
-               f'layers = \\/\n{self.getlayersInfo()}'
+        return f'layers = \\/\n{self.getlayersInfo()}'
