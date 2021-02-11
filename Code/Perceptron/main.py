@@ -122,11 +122,13 @@ def NetworkXOR(I_input):
     return networkOneXOR
 
 if __name__ == '__main__':
+    """
+    This file is purely for debugging, check the notebook
+    """
     # setupNetwork()
     # testIvert(0)
     # testIvert(1)
     # andNetwork([1,0])
     # makeANetwork()
     # NetworkAndOr([0, 0, 0, 0])
-    # NetworkAndInvOR([0, 0, 0])
-    NetworkXOR([0,0])
+    NetworkAndInvOR([0, 0, 0])
