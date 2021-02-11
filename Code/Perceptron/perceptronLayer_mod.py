@@ -8,12 +8,19 @@ class perceptronLayer:
         self.idLayer = idLayer
 
     def activation_triggers(self):
+        """
+        This function gets all the activation triggers from the layer and return it in a list
+        :return:
+        """
         outputlist = []
         for perceptron in self.inputlist:
             outputlist.append(perceptron.getOutput())
         return outputlist
 
     def getInputString(self):
+        """
+        This function is for debuging only, it prints al the inputs of the layers
+        """
         inputstring = ''
         for inputs in self.inputlist:
             inputstring = inputstring + (str(inputs))

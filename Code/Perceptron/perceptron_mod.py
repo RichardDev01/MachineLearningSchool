@@ -28,7 +28,7 @@ class InputNW:
     def getOutput(self):
         """
         This function return the output of the perceptron going through the set activation type
-        :return:
+        The Threshold is to 0 by default but can be changed by the initializing of the object
         """
         if self.activationType == 'Sigmoid':
             return 0  # nog maken

@@ -6,12 +6,18 @@ class PerceptronNetwork:
         self.perceptronLayers = perceptronLayers
 
     def feed_forward(self):
+        """
+        Currently, this function is not used corectly and needs to be chacged later
+        """
         outputlist = []
         for perceptron in self.perceptronLayers:
             outputlist.append(perceptron.activation_triggers())
         return outputlist
 
     def getlayersInfo(self):
+        """
+        This function is for debuging only, it prints al the inputs of the layers
+        """
         inputstring = ''
         for layer in self.perceptronLayers:
             inputstring = inputstring + (str(layer))
