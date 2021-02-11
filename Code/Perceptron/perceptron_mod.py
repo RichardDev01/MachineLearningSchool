@@ -1,5 +1,5 @@
 class InputNW:
-    def __init__(self, inputWeight: [float], bias: float = 0, threshold: float = 0, activationType: str = "Stepper"):
+    def __init__(self, inputWeight: [float], bias: float = 0, threshold: float = 0, activationType: str = "Stepper", idPerceptron: str = "ND"):
         self.inputWeight = inputWeight
         self.bias = bias
         self.threshold = threshold
@@ -7,9 +7,13 @@ class InputNW:
 
     def activate(self, inputvaluelist: [float]):
         """
-        This function sets the Perceptron in action. Give a list of inputs for the perceptron the the output wil be calculated
-        :param inputvaluelist: A Float list with a set of inputs equel to the amouts of weights of this perceptron
+        This function sets the Perceptron in action. Give a list of inputs for the perceptron the the output wil be
+         lculated
+        :param inputvaluelist: A Float list with a set of inputs equal to the amounts of weights of this perceptron
         """
+        if len(inputvaluelist) != len(self.inputWeight):
+            raise Exception(f"The length input is {len(inputvaluelist)} and is not equal"
+                            f" to length of weights({len(self.inputWeight)})")
         self.inputvaluelist = inputvaluelist
         self.inputlist = list(zip(inputvaluelist, self.inputWeight))
         self.output = self.getOutput()
@@ -39,5 +43,5 @@ class InputNW:
 
     def __str__(self):
         return f'This input has {self.inputlist} as input' \
-               f' and has {self.inputWeight} as input' \
-               f' and input has {self.bias} as bias\n '
+               f' and has {self.inputWeight} as weights' \
+               f' and has {self.bias} as bias\n '
