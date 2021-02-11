@@ -14259,7 +14259,7 @@ a.anchor-link {
 
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="P1---Perceptron">P1 - Perceptron<a class="anchor-link" href="#P1---Perceptron">&#182;</a></h1><p><img src="https://cdn.discordapp.com/attachments/701351521433944066/808318912126124052/unknown.png" alt=""></p>
+<h1 id="P1---Perceptron">P1 - Perceptron<a class="anchor-link" href="#P1---Perceptron">&#182;</a></h1><h2 id="Richard-Jansen-1762581">Richard Jansen 1762581<a class="anchor-link" href="#Richard-Jansen-1762581">&#182;</a></h2><p><img src="https://cdn.discordapp.com/attachments/701351521433944066/808318912126124052/unknown.png" alt=""></p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14308,12 +14308,13 @@ a.anchor-link {
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">inverter</span><span class="p">(</span><span class="n">I_input</span><span class="p">):</span>
-    <span class="n">inputInverter</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">inputInverter</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
-    <span class="n">inputlistInverter</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputInverter</span><span class="p">]</span>
-    <span class="n">layerOneInv</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlistInverter</span><span class="p">,</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;Inverter&#39;</span><span class="p">)</span>
+    <span class="n">inputInverter</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;Inverter&#39;</span><span class="p">)</span>
+    
+    <span class="n">layerOneInv</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputInverter</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+    
     <span class="n">networkOne</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneInv</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">networkOne</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">networkOne</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
      </div>
@@ -14329,7 +14330,7 @@ a.anchor-link {
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">makeTruthTable</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">inverter</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">inverter</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14349,8 +14350,8 @@ a.anchor-link {
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>input = [1] and output [[False]]
-input = [0] and output [[True]]
+<pre>input = [1] and output [False]
+input = [0] and output [True]
 </pre>
 </div>
 </div>
@@ -14365,7 +14366,13 @@ input = [0] and output [[True]]
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">inverter</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inputInverter</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;Inverter&#39;</span><span class="p">)</span>
+
+<span class="n">layerOneInv</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputInverter</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+
+<span class="n">networkOne</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneInv</span><span class="p">])</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">networkOne</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">([</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">networkOne</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14385,10 +14392,10 @@ input = [0] and output [[True]]
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>forwardfeed = [[True]] 
-layers = \/
-Inverterp.layer has: 
- This input has [(0, -1)] as input and has [-1] as input and input has 0.5 as bias
+<pre>layers = \/
+
+FirstLayer perceptron.layer has: 
+ This is a Inverter Perceptron and has [(0, -1)] as input and has [-1] as weights and has 0.5 as bias
   
  layer triggers[True]
 </pre>
@@ -14426,12 +14433,13 @@ Inverterp.layer has:
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">andNetwork</span><span class="p">(</span><span class="n">I_input</span><span class="p">):</span>
-    <span class="n">inputAND</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">inputAND</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
-    <span class="n">inputlistAND</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputAND</span><span class="p">]</span>
-    <span class="n">layerOneAND</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlistAND</span><span class="p">)</span>
+    <span class="n">inputAND</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;AND&#39;</span><span class="p">)</span>
+
+    <span class="n">layerOneAND</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputAND</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+    
     <span class="n">networkOneAND</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneAND</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">networkOneAND</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">networkOneAND</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
      </div>
@@ -14447,7 +14455,7 @@ Inverterp.layer has:
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">makeTruthTable</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">andNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">andNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14467,10 +14475,10 @@ Inverterp.layer has:
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>input = [1, 1] and output [[True]]
-input = [1, 0] and output [[False]]
-input = [0, 1] and output [[False]]
-input = [0, 0] and output [[False]]
+<pre>input = [1, 1] and output [True]
+input = [1, 0] and output [False]
+input = [0, 1] and output [False]
+input = [0, 0] and output [False]
 </pre>
 </div>
 </div>
@@ -14485,7 +14493,13 @@ input = [0, 0] and output [[False]]
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">andNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inputAND</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;AND&#39;</span><span class="p">)</span>
+
+<span class="n">layerOneAND</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputAND</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+
+<span class="n">networkOneAND</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneAND</span><span class="p">])</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">networkOneAND</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">networkOneAND</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14505,10 +14519,10 @@ input = [0, 0] and output [[False]]
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>forwardfeed = [[False]] 
-layers = \/
-NDp.layer has: 
- This input has [(0, 1), (0, 1)] as input and has [1, 1] as input and input has -2 as bias
+<pre>layers = \/
+
+FirstLayer perceptron.layer has: 
+ This is a AND Perceptron and has [(0, 1), (1, 1)] as input and has [1, 1] as weights and has -2 as bias
   
  layer triggers[False]
 </pre>
@@ -14532,12 +14546,13 @@ NDp.layer has:
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">orNetwork</span><span class="p">(</span><span class="n">I_input</span><span class="p">):</span>
-    <span class="n">inputOR</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">inputOR</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
-    <span class="n">inputlistOR</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputOR</span><span class="p">]</span>
-    <span class="n">layerOneOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlistOR</span><span class="p">)</span>
+    <span class="n">inputOR</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;Or&#39;</span><span class="p">)</span>
+
+    <span class="n">layerOneOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputOR</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+    
     <span class="n">networkOneOR</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneOR</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">networkOneOR</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">networkOneOR</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
      </div>
@@ -14553,7 +14568,7 @@ NDp.layer has:
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">makeTruthTable</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">orNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">orNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14573,10 +14588,10 @@ NDp.layer has:
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>input = [1, 1] and output [[True]]
-input = [1, 0] and output [[True]]
-input = [0, 1] and output [[True]]
-input = [0, 0] and output [[False]]
+<pre>input = [1, 1] and output [True]
+input = [1, 0] and output [True]
+input = [0, 1] and output [True]
+input = [0, 0] and output [False]
 </pre>
 </div>
 </div>
@@ -14591,7 +14606,13 @@ input = [0, 0] and output [[False]]
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">orNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inputOR</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;Or&#39;</span><span class="p">)</span>
+
+<span class="n">layerOneOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputOR</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+
+<span class="n">networkOneOR</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneOR</span><span class="p">])</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">networkOneOR</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">networkOneOR</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14611,12 +14632,12 @@ input = [0, 0] and output [[False]]
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>forwardfeed = [[False]] 
-layers = \/
-NDp.layer has: 
- This input has [(0, 1), (0, 1)] as input and has [1, 1] as input and input has -1 as bias
+<pre>layers = \/
+
+FirstLayer perceptron.layer has: 
+ This is a Or Perceptron and has [(1, 1), (0, 1)] as input and has [1, 1] as weights and has -1 as bias
   
- layer triggers[False]
+ layer triggers[True]
 </pre>
 </div>
 </div>
@@ -14638,12 +14659,12 @@ NDp.layer has:
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">norNetwork</span><span class="p">(</span><span class="n">I_input</span><span class="p">):</span>
-    <span class="n">inputNOR</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-    <span class="n">inputNOR</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
-    <span class="n">inputlistNOR</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputNOR</span><span class="p">]</span>
-    <span class="n">layerOneNOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlistNOR</span><span class="p">)</span>
+    <span class="n">inputNOR</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;Nor&#39;</span><span class="p">)</span>
+    
+    <span class="n">layerOneNOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputNOR</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
     <span class="n">networkOneNOR</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneNOR</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">networkOneNOR</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">networkOneNOR</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
      </div>
@@ -14659,7 +14680,7 @@ NDp.layer has:
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">makeTruthTable</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">norNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">norNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14679,14 +14700,14 @@ NDp.layer has:
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>input = [1, 1, 1] and output [[False]]
-input = [1, 1, 0] and output [[False]]
-input = [1, 0, 1] and output [[False]]
-input = [1, 0, 0] and output [[False]]
-input = [0, 1, 1] and output [[False]]
-input = [0, 1, 0] and output [[False]]
-input = [0, 0, 1] and output [[False]]
-input = [0, 0, 0] and output [[True]]
+<pre>input = [1, 1, 1] and output [False]
+input = [1, 1, 0] and output [False]
+input = [1, 0, 1] and output [False]
+input = [1, 0, 0] and output [False]
+input = [0, 1, 1] and output [False]
+input = [0, 1, 0] and output [False]
+input = [0, 0, 1] and output [False]
+input = [0, 0, 0] and output [True]
 </pre>
 </div>
 </div>
@@ -14701,7 +14722,12 @@ input = [0, 0, 0] and output [[True]]
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">norNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inputNOR</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;Nor&#39;</span><span class="p">)</span>
+
+<span class="n">layerOneNOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputNOR</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+<span class="n">networkOneNOR</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneNOR</span><span class="p">])</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">networkOneNOR</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">networkOneNOR</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14721,10 +14747,10 @@ input = [0, 0, 0] and output [[True]]
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>forwardfeed = [[True]] 
-layers = \/
-NDp.layer has: 
- This input has [(0, -1), (0, -1), (0, -1)] as input and has [-1, -1, -1] as input and input has 0 as bias
+<pre>layers = \/
+
+FirstLayer perceptron.layer has: 
+ This is a Nor Perceptron and has [(0, -1), (0, -1), (0, -1)] as input and has [-1, -1, -1] as weights and has 0 as bias
   
  layer triggers[True]
 </pre>
@@ -14749,11 +14775,13 @@ NDp.layer has:
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">partyNetwork</span><span class="p">(</span><span class="n">I_input</span><span class="p">):</span>
     <span class="n">inputParty</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mf">0.6</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.2</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
-    <span class="n">inputParty</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    
     <span class="n">inputlistParty</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputParty</span><span class="p">]</span>
-    <span class="n">layerOneParty</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlistParty</span><span class="p">)</span>
+    
+    <span class="n">layerOneParty</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlistParty</span><span class="p">,</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
     <span class="n">networkOneParty</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneParty</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">networkOneParty</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">networkOneParty</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
      </div>
@@ -14769,7 +14797,7 @@ NDp.layer has:
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">makeTruthTable</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">partyNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">partyNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14789,14 +14817,14 @@ NDp.layer has:
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>input = [1, 1, 1] and output [[True]]
-input = [1, 1, 0] and output [[True]]
-input = [1, 0, 1] and output [[True]]
-input = [1, 0, 0] and output [[True]]
-input = [0, 1, 1] and output [[True]]
-input = [0, 1, 0] and output [[False]]
-input = [0, 0, 1] and output [[False]]
-input = [0, 0, 0] and output [[False]]
+<pre>input = [1, 1, 1] and output [True]
+input = [1, 1, 0] and output [True]
+input = [1, 0, 1] and output [True]
+input = [1, 0, 0] and output [True]
+input = [0, 1, 1] and output [True]
+input = [0, 1, 0] and output [False]
+input = [0, 0, 1] and output [False]
+input = [0, 0, 0] and output [False]
 </pre>
 </div>
 </div>
@@ -14811,7 +14839,14 @@ input = [0, 0, 0] and output [[False]]
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">partyNetwork</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inputParty</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mf">0.6</span><span class="p">,</span><span class="mf">0.3</span><span class="p">,</span><span class="mf">0.2</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">threshold</span> <span class="o">=</span> <span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">inputlistParty</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputParty</span><span class="p">]</span>
+
+<span class="n">layerOneParty</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlistParty</span><span class="p">,</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+<span class="n">networkOneParty</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneParty</span><span class="p">])</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">networkOneParty</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">networkOneParty</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14831,12 +14866,12 @@ input = [0, 0, 0] and output [[False]]
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>forwardfeed = [[False]] 
-layers = \/
-NDp.layer has: 
- This input has [(0, 0.6), (0, 0.3), (0, 0.2)] as input and has [0.6, 0.3, 0.2] as input and input has 0 as bias
+<pre>layers = \/
+
+FirstLayer perceptron.layer has: 
+ This is a ND Perceptron and has [(1, 0.6), (1, 0.3), (1, 0.2)] as input and has [0.6, 0.3, 0.2] as weights and has 0 as bias
   
- layer triggers[False]
+ layer triggers[True]
 </pre>
 </div>
 </div>
@@ -14848,7 +14883,7 @@ NDp.layer has:
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="2-perceptrons-outputs-test">2 perceptrons outputs test<a class="anchor-link" href="#2-perceptrons-outputs-test">&#182;</a></h1><p><img src="https://cdn.discordapp.com/attachments/808321877193916456/809054321198366760/20210210_143250.jpg" width="400"></p>
+<h1 id="2-perceptrons-outputs-test">2 perceptrons outputs test<a class="anchor-link" href="#2-perceptrons-outputs-test">&#182;</a></h1><p><img src="https://cdn.discordapp.com/attachments/808321877193916456/809397879273291806/20210211_131756.jpg" width="400"></p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14858,17 +14893,14 @@ NDp.layer has:
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">NetworkAndOr</span><span class="p">(</span><span class="n">I_input</span><span class="p">):</span>
-    <span class="n">inputAndOr1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">inputAndOr1</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
-    
-    <span class="n">inputAndOr2</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">inputAndOr2</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
-    
-    <span class="n">inputlistAndOr</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputAndOr1</span><span class="p">,</span><span class="n">inputAndOr2</span><span class="p">]</span>
-    <span class="n">layerOneAndOr</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlistAndOr</span><span class="p">)</span>
+    <span class="n">inputAndOr1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;AND&#39;</span><span class="p">)</span>    
+    <span class="n">inputAndOr2</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;or&#39;</span><span class="p">)</span>
+
+    <span class="n">layerOneAndOr</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputAndOr1</span><span class="p">,</span><span class="n">inputAndOr2</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
     
     <span class="n">networkOneAndOr</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneAndOr</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">networkOneAndOr</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">networkOneAndOr</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
      </div>
@@ -14884,7 +14916,7 @@ NDp.layer has:
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">makeTruthTable</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">NetworkAndOr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">NetworkAndOr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14904,22 +14936,22 @@ NDp.layer has:
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>input = [1, 1, 1, 1] and output [[True, True]]
-input = [1, 1, 1, 0] and output [[True, True]]
-input = [1, 1, 0, 1] and output [[True, True]]
-input = [1, 1, 0, 0] and output [[True, False]]
-input = [1, 0, 1, 1] and output [[False, True]]
-input = [1, 0, 1, 0] and output [[False, True]]
-input = [1, 0, 0, 1] and output [[False, True]]
-input = [1, 0, 0, 0] and output [[False, False]]
-input = [0, 1, 1, 1] and output [[False, True]]
-input = [0, 1, 1, 0] and output [[False, True]]
-input = [0, 1, 0, 1] and output [[False, True]]
-input = [0, 1, 0, 0] and output [[False, False]]
-input = [0, 0, 1, 1] and output [[False, True]]
-input = [0, 0, 1, 0] and output [[False, True]]
-input = [0, 0, 0, 1] and output [[False, True]]
-input = [0, 0, 0, 0] and output [[False, False]]
+<pre>input = [1, 1, 1, 1] and output [True, True]
+input = [1, 1, 1, 0] and output [True, True]
+input = [1, 1, 0, 1] and output [True, True]
+input = [1, 1, 0, 0] and output [True, False]
+input = [1, 0, 1, 1] and output [False, True]
+input = [1, 0, 1, 0] and output [False, True]
+input = [1, 0, 0, 1] and output [False, True]
+input = [1, 0, 0, 0] and output [False, False]
+input = [0, 1, 1, 1] and output [False, True]
+input = [0, 1, 1, 0] and output [False, True]
+input = [0, 1, 0, 1] and output [False, True]
+input = [0, 1, 0, 0] and output [False, False]
+input = [0, 0, 1, 1] and output [False, True]
+input = [0, 0, 1, 0] and output [False, True]
+input = [0, 0, 0, 1] and output [False, True]
+input = [0, 0, 0, 0] and output [False, False]
 </pre>
 </div>
 </div>
@@ -14934,7 +14966,14 @@ input = [0, 0, 0, 0] and output [[False, False]]
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">NetworkAndOr</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inputAndOr1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;AND&#39;</span><span class="p">)</span>    
+<span class="n">inputAndOr2</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;OR&#39;</span><span class="p">)</span>
+
+<span class="n">layerOneAndOr</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputAndOr1</span><span class="p">,</span><span class="n">inputAndOr2</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+
+<span class="n">networkOneAndOr</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneAndOr</span><span class="p">])</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">networkOneAndOr</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">networkOneAndOr</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -14954,13 +14993,13 @@ input = [0, 0, 0, 0] and output [[False, False]]
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>forwardfeed = [[False, False]] 
-layers = \/
-NDp.layer has: 
- This input has [(0, 1), (0, 1)] as input and has [1, 1] as input and input has -2 as bias
- This input has [(0, 1), (0, 1)] as input and has [1, 1] as input and input has -1 as bias
+<pre>layers = \/
+
+FirstLayer perceptron.layer has: 
+ This is a AND Perceptron and has [(1, 1), (1, 1), (0, 0), (0, 0)] as input and has [1, 1, 0, 0] as weights and has -2 as bias
+ This is a OR Perceptron and has [(1, 0), (1, 0), (0, 1), (0, 1)] as input and has [0, 0, 1, 1] as weights and has -1 as bias
   
- layer triggers[False, False]
+ layer triggers[True, False]
 </pre>
 </div>
 </div>
@@ -14972,7 +15011,7 @@ NDp.layer has:
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="2-perceptron-outputs-test">2 perceptron outputs test<a class="anchor-link" href="#2-perceptron-outputs-test">&#182;</a></h1><p><img src="https://cdn.discordapp.com/attachments/808321877193916456/809073520251633684/20210210_154903.jpg" width="400"></p>
+<h1 id="2-perceptron-outputs-test">2 perceptron outputs test<a class="anchor-link" href="#2-perceptron-outputs-test">&#182;</a></h1><p><img src="https://cdn.discordapp.com/attachments/808321877193916456/809399021315031090/20210211_132232.jpg" width="400"></p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -14982,25 +15021,18 @@ NDp.layer has:
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">NetworkAndInvOR</span><span class="p">(</span><span class="n">I_input</span><span class="p">):</span>
-    <span class="n">inputAndInvOR1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">inputAndInvOR1</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">[:</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">inputAndInvOR1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;AND&#39;</span><span class="p">)</span>
+    <span class="n">inputAndInvOR2</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;INV&#39;</span><span class="p">)</span>
+
+    <span class="n">layerOneAndInvOr</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputAndInvOR1</span><span class="p">,</span><span class="n">inputAndInvOR2</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
     
-    <span class="n">inputAndInvOR2</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">inputAndInvOR2</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">[</span><span class="mi">2</span><span class="p">:])</span>
+    <span class="n">inputAndInvOR3</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;OR&#39;</span><span class="p">)</span>
+
+    <span class="n">layerTwoAndInvOr</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputAndInvOR3</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;SecondLayer&#39;</span><span class="p">)</span>
     
-    <span class="n">inputlistAndInvOr</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputAndInvOR1</span><span class="p">,</span><span class="n">inputAndInvOR2</span><span class="p">]</span>
-    <span class="n">layerOneAndInvOr</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlistAndInvOr</span><span class="p">)</span>
-    
-    <span class="c1">##############################################</span>
-    
-    <span class="n">inputAndInvOR3</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">inputAndInvOR3</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">layerOneAndInvOr</span><span class="o">.</span><span class="n">activation_triggers</span><span class="p">())</span>
-    
-    <span class="n">inputlist2AndInvOr</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputAndInvOR3</span><span class="p">]</span>
-    <span class="n">layerTwoAndInvOr</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlist2AndInvOr</span><span class="p">)</span>
-    
-    <span class="n">networkOneAndInvOR</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerTwoAndInvOr</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">networkOneAndInvOR</span>
+    <span class="n">networkOneAndInvOR</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneAndInvOr</span><span class="p">,</span> <span class="n">layerTwoAndInvOr</span><span class="p">])</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">networkOneAndInvOR</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
      </div>
@@ -15017,7 +15049,7 @@ NDp.layer has:
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">makeTruthTable</span><span class="p">(</span><span class="mi">3</span><span class="p">)[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;        I1 I2 I3&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">NetworkAndInvOR</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">NetworkAndInvOR</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15038,14 +15070,14 @@ NDp.layer has:
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>        I1 I2 I3
-input = [0, 0, 0] and output [[True]]
-input = [0, 0, 1] and output [[False]]
-input = [0, 1, 0] and output [[True]]
-input = [0, 1, 1] and output [[False]]
-input = [1, 0, 0] and output [[True]]
-input = [1, 0, 1] and output [[False]]
-input = [1, 1, 0] and output [[True]]
-input = [1, 1, 1] and output [[True]]
+input = [0, 0, 0] and output [True]
+input = [0, 0, 1] and output [False]
+input = [0, 1, 0] and output [True]
+input = [0, 1, 1] and output [False]
+input = [1, 0, 0] and output [True]
+input = [1, 0, 1] and output [False]
+input = [1, 1, 0] and output [True]
+input = [1, 1, 1] and output [True]
 </pre>
 </div>
 </div>
@@ -15060,7 +15092,18 @@ input = [1, 1, 1] and output [[True]]
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">NetworkAndInvOR</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">inputAndInvOR1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;AND&#39;</span><span class="p">)</span>
+<span class="n">inputAndInvOR2</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;INV&#39;</span><span class="p">)</span>
+
+<span class="n">layerOneAndInvOr</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputAndInvOR1</span><span class="p">,</span><span class="n">inputAndInvOR2</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+
+<span class="n">inputAndInvOR3</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;OR&#39;</span><span class="p">)</span>
+
+<span class="n">layerTwoAndInvOr</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">inputAndInvOR3</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span> <span class="s1">&#39;SecondLayer&#39;</span><span class="p">)</span>
+
+<span class="n">networkOneAndInvOR</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneAndInvOr</span><span class="p">,</span> <span class="n">layerTwoAndInvOr</span><span class="p">])</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">networkOneAndInvOR</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">networkOneAndInvOR</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15080,10 +15123,15 @@ input = [1, 1, 1] and output [[True]]
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>forwardfeed = [[True]] 
-layers = \/
-NDp.layer has: 
- This input has [(False, 1), (True, 1)] as input and has [1, 1] as input and input has -1 as bias
+<pre>layers = \/
+
+FirstLayer perceptron.layer has: 
+ This is a AND Perceptron and has [(1, 1), (1, 1), (1, 0)] as input and has [1, 1, 0] as weights and has -2 as bias
+ This is a INV Perceptron and has [(1, 0), (1, 0), (1, -1)] as input and has [0, 0, -1] as weights and has 0.5 as bias
+  
+ layer triggers[True, False]
+SecondLayer perceptron.layer has: 
+ This is a OR Perceptron and has [(True, 1), (False, 1)] as input and has [1, 1] as weights and has -1 as bias
   
  layer triggers[True]
 </pre>
@@ -15107,28 +15155,18 @@ NDp.layer has:
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">NetworkXOR</span><span class="p">(</span><span class="n">I_input</span><span class="p">):</span>
-    <span class="c1">#NAND</span>
-    <span class="n">inputXOR1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">inputXOR1</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    <span class="n">NAND</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;NAND&#39;</span><span class="p">)</span>
+    <span class="n">OR</span>   <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;OR&#39;</span><span class="p">)</span>
     
-    <span class="c1">#OR</span>
-    <span class="n">inputXOR2</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">inputXOR2</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    <span class="n">layerOneXOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">NAND</span><span class="p">,</span><span class="n">OR</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span><span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
     
-    <span class="n">inputlistXOR</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputXOR1</span><span class="p">,</span><span class="n">inputXOR2</span><span class="p">]</span>
-    <span class="n">layerOneXOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlistXOR</span><span class="p">)</span>
+    <span class="n">AND</span>  <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;AND&#39;</span><span class="p">)</span>
+
+    <span class="n">layerTwoXOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">AND</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span><span class="s1">&#39;SecondLayer&#39;</span><span class="p">)</span>
     
-    <span class="c1">##############################################</span>
-    
-    <span class="c1">#AND</span>
-    <span class="n">inputXOR3</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">inputXOR3</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">layerOneXOR</span><span class="o">.</span><span class="n">activation_triggers</span><span class="p">())</span>
-    
-    <span class="n">inputlist2XOR</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputXOR3</span><span class="p">]</span>
-    <span class="n">layerTwoXOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlist2XOR</span><span class="p">)</span>
-    
-    <span class="n">networkOneXOR</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerTwoXOR</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">networkOneXOR</span>
+    <span class="n">networkOneXOR</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneXOR</span><span class="p">,</span> <span class="n">layerTwoXOR</span><span class="p">])</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">networkOneXOR</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
      </div>
@@ -15144,7 +15182,7 @@ NDp.layer has:
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">makeTruthTable</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">NetworkXOR</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">NetworkXOR</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15164,10 +15202,66 @@ NDp.layer has:
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>input = [1, 1] and output [[False]]
-input = [1, 0] and output [[True]]
-input = [0, 1] and output [[True]]
-input = [0, 0] and output [[False]]
+<pre>input = [1, 1] and output [False]
+input = [1, 0] and output [True]
+input = [0, 1] and output [True]
+input = [0, 0] and output [False]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">NAND</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;NAND&#39;</span><span class="p">)</span>
+<span class="n">OR</span>   <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;OR&#39;</span><span class="p">)</span>
+
+<span class="n">layerOneXOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">NAND</span><span class="p">,</span><span class="n">OR</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span><span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+
+<span class="n">AND</span>  <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;AND&#39;</span><span class="p">)</span>
+
+<span class="n">layerTwoXOR</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">AND</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span><span class="s1">&#39;SecondLayer&#39;</span><span class="p">)</span>
+
+<span class="n">networkOneXOR</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerOneXOR</span><span class="p">,</span> <span class="n">layerTwoXOR</span><span class="p">])</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">networkOneXOR</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">networkOneXOR</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>layers = \/
+
+FirstLayer perceptron.layer has: 
+ This is a NAND Perceptron and has [(0, -1), (1, -1)] as input and has [-1, -1] as weights and has 1 as bias
+ This is a OR Perceptron and has [(0, 1), (1, 1)] as input and has [1, 1] as weights and has -1 as bias
+  
+ layer triggers[True, True]
+SecondLayer perceptron.layer has: 
+ This is a AND Perceptron and has [(True, 1), (True, 1)] as input and has [1, 1] as weights and has -2 as bias
+  
+ layer triggers[True]
 </pre>
 </div>
 </div>
@@ -15185,42 +15279,24 @@ input = [0, 0] and output [[False]]
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[26]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">NetworkHalfAdder</span><span class="p">(</span><span class="n">I_input</span><span class="p">):</span>
-    <span class="c1">#NAND</span>
-    <span class="n">inputHalfAdder1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">inputHalfAdder1</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
-    
-    <span class="c1">#OR</span>
-    <span class="n">inputHalfAdder2</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">inputHalfAdder2</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
-    
-    <span class="c1">#AND</span>
-    <span class="n">inputHalfAdder3</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">inputHalfAdder3</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
-    
-    <span class="n">inputlistHalfAdder</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputHalfAdder1</span><span class="p">,</span><span class="n">inputHalfAdder2</span><span class="p">,</span><span class="n">inputHalfAdder3</span><span class="p">]</span>
-    <span class="n">layerOneHalfAdder</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlistHalfAdder</span><span class="p">)</span>
-    
+    <span class="n">NAND1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;NAND 1&#39;</span><span class="p">)</span>
+    <span class="n">OR1</span>   <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;OR 1&#39;</span><span class="p">)</span>
+    <span class="n">AND1</span>  <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;AND 1&#39;</span><span class="p">)</span>
 
+    <span class="n">AND2</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;NAND 2&#39;</span><span class="p">)</span>
+    <span class="n">REP1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;REP 1&#39;</span><span class="p">)</span>
+
+    <span class="n">layer1</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">OR1</span><span class="p">,</span> <span class="n">NAND1</span><span class="p">,</span> <span class="n">AND1</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span><span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+    <span class="n">layer2</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">AND2</span><span class="p">,</span> <span class="n">REP1</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span><span class="s1">&#39;SecondLayer&#39;</span><span class="p">)</span>
+
+    <span class="n">network</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layer1</span><span class="p">,</span><span class="n">layer2</span><span class="p">])</span>
     
-    <span class="c1">##############################################</span>
-    
-    <span class="c1">#AND 2</span>
-    <span class="n">inputHalfAdder4</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">inputHalfAdder4</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">layerOneHalfAdder</span><span class="o">.</span><span class="n">activation_triggers</span><span class="p">())</span>
-    
-    <span class="c1">#Pass through (1 op 1 door)</span>
-    <span class="n">inputHalfAdder5</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">inputHalfAdder5</span><span class="o">.</span><span class="n">activate</span><span class="p">(</span><span class="n">layerOneHalfAdder</span><span class="o">.</span><span class="n">activation_triggers</span><span class="p">())</span>
-    
-    <span class="n">inputlist2HalfAdder</span> <span class="o">=</span> <span class="p">[</span><span class="n">inputHalfAdder4</span><span class="p">,</span> <span class="n">inputHalfAdder5</span><span class="p">]</span>
-    <span class="n">layerTwoHalfAdder</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">(</span><span class="n">inputlist2HalfAdder</span><span class="p">)</span>
-    
-    <span class="n">networkOneHalfAdder</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layerTwoHalfAdder</span><span class="p">])</span>
-    <span class="k">return</span> <span class="n">networkOneHalfAdder</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">(</span><span class="n">I_input</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">output</span>
 </pre></div>
 
      </div>
@@ -15231,13 +15307,13 @@ input = [0, 0] and output [[False]]
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[27]:</div>
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[28]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">table</span> <span class="o">=</span> <span class="n">makeTruthTable</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;        I1 I2               Sum     Carry&#39;</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">table</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">NetworkHalfAdder</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">()</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;input = </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="si">}</span><span class="s1"> and output </span><span class="si">{</span><span class="n">NetworkHalfAdder</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">i</span><span class="p">))</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
 </pre></div>
 
      </div>
@@ -15258,10 +15334,70 @@ input = [0, 0] and output [[False]]
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>        I1 I2               Sum     Carry
-input = [1, 1] and output [[False, True]]
-input = [1, 0] and output [[True, False]]
-input = [0, 1] and output [[True, False]]
-input = [0, 0] and output [[False, False]]
+input = [1, 1] and output [False, True]
+input = [1, 0] and output [True, False]
+input = [0, 1] and output [True, False]
+input = [0, 0] and output [False, False]
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[29]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">NAND1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;NAND 1&#39;</span><span class="p">)</span>
+<span class="n">OR1</span>   <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;OR 1&#39;</span><span class="p">)</span>
+<span class="n">AND1</span>  <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;AND 1&#39;</span><span class="p">)</span>
+
+<span class="n">AND2</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">2</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;NAND 2&#39;</span><span class="p">)</span>
+<span class="n">REP1</span> <span class="o">=</span> <span class="n">im</span><span class="o">.</span><span class="n">InputNW</span><span class="p">(</span><span class="n">inputWeight</span> <span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">bias</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">idPerceptron</span><span class="o">=</span><span class="s1">&#39;REP 1&#39;</span><span class="p">)</span>
+
+<span class="n">layer1</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">OR1</span><span class="p">,</span> <span class="n">NAND1</span><span class="p">,</span> <span class="n">AND1</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span><span class="s1">&#39;FirstLayer&#39;</span><span class="p">)</span>
+<span class="n">layer2</span> <span class="o">=</span> <span class="n">ptl</span><span class="o">.</span><span class="n">perceptronLayer</span><span class="p">([</span><span class="n">AND2</span><span class="p">,</span> <span class="n">REP1</span><span class="p">],</span> <span class="n">idLayer</span><span class="o">=</span><span class="s1">&#39;SecondLayer&#39;</span><span class="p">)</span>
+
+<span class="n">network</span> <span class="o">=</span> <span class="n">ptn</span><span class="o">.</span><span class="n">PerceptronNetwork</span><span class="p">([</span><span class="n">layer1</span><span class="p">,</span><span class="n">layer2</span><span class="p">])</span>
+
+<span class="n">output</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">feed_forward</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">network</span><span class="p">)</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+    
+    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>layers = \/
+
+FirstLayer perceptron.layer has: 
+ This is a OR 1 Perceptron and has [(1, 1), (1, 1)] as input and has [1, 1] as weights and has -1 as bias
+ This is a NAND 1 Perceptron and has [(1, -1), (1, -1)] as input and has [-1, -1] as weights and has 1 as bias
+ This is a AND 1 Perceptron and has [(1, 1), (1, 1)] as input and has [1, 1] as weights and has -2 as bias
+  
+ layer triggers[True, False, True]
+SecondLayer perceptron.layer has: 
+ This is a NAND 2 Perceptron and has [(True, 1), (False, 1), (True, 0)] as input and has [1, 1, 0] as weights and has -2 as bias
+ This is a REP 1 Perceptron and has [(True, 0), (False, 0), (True, 1)] as input and has [0, 0, 1] as weights and has -1 as bias
+  
+ layer triggers[False, True]
 </pre>
 </div>
 </div>
