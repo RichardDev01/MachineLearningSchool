@@ -4,6 +4,7 @@ class InputNW:
         self.bias = bias
         self.threshold = threshold
         self.activationType = activationType  # This can be expanded on to work with the sigmoid function
+        self.id = idPerceptron
 
     def activate(self, inputvaluelist: [float]):
         """
@@ -42,6 +43,7 @@ class InputNW:
             return self.getValue() >= self.threshold  # Stepper activation as boolean
 
     def __str__(self):
-        return f'This input has {self.inputlist} as input' \
+        return f'This is a {self.id} Perceptron' \
+               f' and has {self.inputlist} as input' \
                f' and has {self.inputWeight} as weights' \
                f' and has {self.bias} as bias\n '
