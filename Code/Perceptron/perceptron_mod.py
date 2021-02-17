@@ -1,12 +1,14 @@
+from typing import List
+
 class InputNW:
-    def __init__(self, inputWeight: [float], bias: float = 0, threshold: float = 0, activationType: str = "Stepper", idPerceptron: str = "ND"):
+    def __init__(self, inputWeight: List[float], bias: float = 0, threshold: float = 0, activationType: str = "Stepper", idPerceptron: str = "ND"):
         self.inputWeight = inputWeight
         self.bias = bias
         self.threshold = threshold
         self.activationType = activationType  # This can be expanded on to work with the sigmoid function
         self.id = idPerceptron
 
-    def activate(self, inputvaluelist: [float]):
+    def activate(self, inputvaluelist: List[float]):
         """
         This function sets the Perceptron in action. Give a list of inputs for the perceptron the the output wil be
          lculated

@@ -1,11 +1,12 @@
 import perceptronLayer_mod as perceptronLayer
+from typing import List
 
 
 class PerceptronNetwork:
     def __init__(self, perceptronLayers: [perceptronLayer]):
         self.perceptronLayers = perceptronLayers
 
-    def feed_forward(self, inputvaluelist: [float]):
+    def feed_forward(self, inputvaluelist: List[float]):
         """
         This function feed the input through till the beginning
         """
