@@ -1,6 +1,11 @@
 import perceptron_mod as im
 import perceptronLayer_mod as ptl
 import perceptronNetwork_mod as ptn
+from itertools import product # for truth table
+
+
+def makeTruthTable(length):
+    return [p for p in product([1, 0], repeat=length)]
 
 
 def setupNetwork():
@@ -142,6 +147,27 @@ def feedForwardTest():
     print(network)
     # print(layer1)
 
+def learning_rule():
+    expected_output_and = (([1, 1], [True]),
+                       ([1, 0], [False]),
+                       ([0, 1], [False]),
+                       ([0, 0], [False]))
+
+
+    table = makeTruthTable(2)
+    for index, i in enumerate(table):
+        print(i)
+
+    AND1 = im.InputNW(inputWeight=[0, 0], bias=-2, idPerceptron='AND 1')
+    AND1.activate([1,1])
+    print(AND1)
+    print(AND1.error(expected_output_and))
+    # print(expected_output_and[0][0])
+    AND1.update(expected_output_and, epoch=30)
+    AND1.activate([1, 1])
+    print(AND1)
+    print(AND1.error(expected_output_and))
+
 if __name__ == '__main__':
     """
     This file is purely for debugging, check the notebook
@@ -153,4 +179,5 @@ if __name__ == '__main__':
     # makeANetwork()
     # NetworkAndOr([0, 0, 0, 0])
     # NetworkAndInvOR([0, 0, 0])
-    feedForwardTest()
+    # feedForwardTest()
+    learning_rule()

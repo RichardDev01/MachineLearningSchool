@@ -1,5 +1,6 @@
 from typing import List
 
+
 class InputNW:
     def __init__(self, inputWeight: List[float], bias: float = 0, threshold: float = 0, activationType: str = "Stepper", idPerceptron: str = "ND"):
         self.inputWeight = inputWeight
@@ -44,8 +45,51 @@ class InputNW:
         else:
             return self.getValue() >= self.threshold  # Stepper activation as boolean
 
+    def update(self, trainset: ([], []), epoch:int = 1, learningRate: float = 0.1):
+
+        for runtime in range(epoch):
+            for index, example in enumerate(trainset):
+                # output y = f(w ∙ x) met activatiefunctie f en y ∈ {0, 1}
+                self.activate(example[0])
+                output = self.getOutput()
+
+                target = example[1][0]
+
+                # error e = d – y
+                error = target - output
+
+                # Δw = η ∙ e ∙ x
+                # w' = w + Δw
+                for index, weight in enumerate(self.inputWeight):
+                    self.inputWeight[index] += learningRate * error * example[0][index]
+
+                # Δb = η ∙ e
+                # b' = b + Δb
+                self.bias += learningRate * error
+
+
+    def error(self, trainset: ([], [])):
+    #MSE = Σ | d – y |^2 / n
+
+        errorSum = 0.0
+        for index, example in enumerate(trainset):
+            # | d – y |^2
+            self.activate(example[0])
+            output = self.getOutput()
+
+            target = example[1][0]
+
+            error = target - output
+            errorSum += error**2
+        
+        # Σ |errorSum| / n
+        errorSum = errorSum / len(trainset)
+        return errorSum
+
+
     def __str__(self):
         return f'This is a {self.id} Perceptron' \
-               f' and has {self.inputlist} as input' \
+               f' and has {self.inputvaluelist} as input' \
                f' and has {self.inputWeight} as weights' \
-               f' and has {self.bias} as bias\n '
+               f' and has {self.bias} as bias' \
+               f' and output of this perceptron = {self.getOutput()}\n '
