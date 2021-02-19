@@ -81,7 +81,7 @@ class InputNW:
 
             error = target - output
             errorSum += error**2
-        
+
         # Σ |errorSum| / n
         errorSum = errorSum / len(trainset)
         return errorSum

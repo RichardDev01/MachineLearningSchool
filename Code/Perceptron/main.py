@@ -168,6 +168,37 @@ def learning_rule():
     print(AND1)
     print(AND1.error(expected_output_and))
 
+from sklearn.datasets import load_iris
+import random
+random.seed(1762581)
+
+def random_number_list(size_n):
+    randomnumber_list = []
+    for ri in range(size_n):
+        randomnumber_list.append(round(random.random()*10,1))
+    return randomnumber_list
+
+def random_number_float():
+    return random.randint(-10, 10)
+
+
+def iris_db():
+    dataset = load_iris()
+    data = dataset['data'].tolist()
+    target = dataset['target'].tolist()
+    target_names = dataset['target_names']
+    feature_names = dataset['feature_names']
+    target = [[x] for x in target]
+    expected_results = tuple(zip(data, list(target)))
+
+    threeFlowers = im.InputNW(inputWeight=random_number_list(len(feature_names)), bias=random_number_float(),
+                              idPerceptron='threeFlowers')
+    threeFlowers.activate([0, 0, 0, 0])
+    print(threeFlowers)
+
+    threeFlowers.update(expected_results, epoch=1)
+    print(threeFlowers.getOutput())
+
 if __name__ == '__main__':
     """
     This file is purely for debugging, check the notebook
@@ -179,5 +210,6 @@ if __name__ == '__main__':
     # makeANetwork()
     # NetworkAndOr([0, 0, 0, 0])
     # NetworkAndInvOR([0, 0, 0])
-    # feedForwardTest()
-    learning_rule()
+    feedForwardTest()
+    # learning_rule()
+    # iris_db()
