@@ -96,23 +96,68 @@ def sigmoidNOR():
     print(NOR1, '\n' ,NOR1.error(expected_output_nor))
 
 
-def sigmoidHalfAdder():
+def sigmoidNAND():
+    expected_output_nand = (([1, 1], [False]),
+                           ([1, 0], [True]),
+                           ([0, 1], [True]),
+                           ([0, 0], [True]))
     table = makeTruthTable(2)
     NAND1 = im.InputNW(inputWeight=[-12, -12], bias=18, idPerceptron='NAND 1', activationType='Sigmoid')
+
+
+    for index, i in enumerate(table):
+        # output = network.feed_forward(list(i))
+        NAND1.activate(list(i))
+        output = NAND1.getOutput()
+        print(f'input = {list(i)} and output {output} expected output = {expected_output_nand[index][1]} difference == {expected_output_nand[index][1][0] - output}')
+    print(NAND1, '\n' ,NAND1.error(expected_output_nand))
+
+
+def sigmoidXOR():
+    expected_output_xor = (([1, 1], [False]),
+                           ([1, 0], [True]),
+                           ([0, 1], [True]),
+                           ([0, 0], [False]))
+
+    table = makeTruthTable(2)
     OR1 = im.InputNW(inputWeight=[24, 24], bias=-12, idPerceptron='OR 1', activationType='Sigmoid')
+    NAND1 = im.InputNW(inputWeight=[-12, -12], bias=18, idPerceptron='NAND 1', activationType='Sigmoid')
     AND1 = im.InputNW(inputWeight=[12, 12], bias=-18, idPerceptron='AND 1', activationType='Sigmoid')
 
-    AND2 = im.InputNW(inputWeight=[12, 12, 12], bias=-27, idPerceptron='AND 2', activationType='Sigmoid')
-    REP1 = im.InputNW(inputWeight=[1, 1, 1], bias=12, idPerceptron='REP 1', activationType='Sigmoid')
+    layerOneXOR = ptl.perceptronLayer([NAND1, OR1], idLayer='FirstLayer')
+    layerTwoXOR = ptl.perceptronLayer([AND1], idLayer='SecondLayer')
+
+    networkOneXOR = ptn.PerceptronNetwork([layerOneXOR, layerTwoXOR])
+
+
+    for index, i in enumerate(table):
+        # output = network.feed_forward(list(i))
+        output = networkOneXOR.feed_forward(list(i))
+        print(f'input = {list(i)} and output {output} expected output = {expected_output_xor[index][1]} difference == {expected_output_xor[index][1][0] - output[0]}')
+    # print(XOR1, '\n' ,XOR1.error(expected_output_xor))
+
+def sigmoidHalfAdder():
+    expected_output_ha = (([1, 1], [False, True]),
+                           ([1, 0], [True, False]),
+                           ([0, 1], [True, False]),
+                           ([0, 0], [False, False]))
+
+    table = makeTruthTable(2)
+    OR1 = im.InputNW(inputWeight=[24, 24], bias=-12, idPerceptron='OR 1', activationType='Sigmoid')
+    NAND1 = im.InputNW(inputWeight=[-12, -12], bias=18, idPerceptron='NAND 1', activationType='Sigmoid')
+    AND1 = im.InputNW(inputWeight=[12, 12], bias=-18, idPerceptron='AND 1', activationType='Sigmoid')
+
+    AND2 = im.InputNW(inputWeight=[12, 12, 0], bias=-18, idPerceptron='AND 2', activationType='Sigmoid')
+    REP1 = im.InputNW(inputWeight=[0, 0, 24], bias=-12, idPerceptron='REP 1', activationType='Sigmoid')
 
 
     layer1 = ptl.perceptronLayer([OR1, NAND1, AND1], idLayer='FirstLayer')
     layer2 = ptl.perceptronLayer([AND2, REP1], idLayer='SecondLayer')
 
     network = ptn.PerceptronNetwork([layer1, layer2])
-    for i in table:
+    for index, i in enumerate(table):
         output = network.feed_forward(list(i))
-        print(f'input = {list(i)} and output {output}')
+        print(f'input = {list(i)} and output {output} expected output = {expected_output_ha[index][1]} difference == {expected_output_ha[index][1][0] - output[0]}')
     print(network, '\n')
 
 
@@ -125,4 +170,6 @@ if __name__ == '__main__':
     # sigmoidINV()
     # sigmoidOR()
     # sigmoidNOR()
+    # sigmoidNAND()
+    # sigmoidXOR()
     sigmoidHalfAdder()
