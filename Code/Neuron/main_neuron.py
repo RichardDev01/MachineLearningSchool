@@ -3,26 +3,6 @@ import neuronLayer_mod as ptl
 import neuronNetwork_mod as ptn
 
 
-def feedForwardTest():
-    NAND1 = im.InputNW(inputWeight =[-1,-1], bias=1, idPerceptron='NAND 1')
-    OR1   = im.InputNW(inputWeight=[1, 1], bias=-1, idPerceptron='OR 1')
-    AND1  = im.InputNW(inputWeight =[1,1], bias=-2, idPerceptron='AND 1')
-
-    AND2 = im.InputNW(inputWeight =[1,1,0], bias=-2, idPerceptron='NAND 2')
-    REP1 = im.InputNW(inputWeight =[0,0,1], bias=-1, idPerceptron='REP 1')
-
-    layer1 = ptl.perceptronLayer([OR1, NAND1, AND1], idLayer='FirstLayer')
-    layer2 = ptl.perceptronLayer([AND2, REP1], idLayer='SecondLayer')
-
-    network = ptn.PerceptronNetwork([layer1,layer2])
-
-    print(network.feed_forward([0, 0]))
-    print(network.feed_forward([0, 1]))
-    print(network.feed_forward([1, 0]))
-    print(network.feed_forward([1, 1]))
-    print(network)
-    # print(layer1)
-
 from itertools import product # for truth table
 
 def makeTruthTable(length):
@@ -34,45 +14,46 @@ def sigmoidAND():
                        ([1, 0], [False]),
                        ([0, 1], [False]),
                        ([0, 0], [False]))
+    print(f"And Gate expectation = {expected_output_and}")
     table = makeTruthTable(2)
     AND1 = im.InputNW(inputWeight=[12, 12], bias=-18, idPerceptron='AND 1', activationType='Sigmoid')
 
     for index, i in enumerate(table):
-        # output = network.feed_forward(list(i))
         AND1.activate(list(i))
         output = AND1.getOutput()
         print(f'input = {list(i)} and output {output} expected output = {expected_output_and[index][1]} difference == {expected_output_and[index][1][0] - output}')
-    print(AND1, '\n' ,AND1.error(expected_output_and))
+    print(f"The error = {AND1.error(expected_output_and)} \n")
 
 
 def sigmoidINV():
     expected_output_inv = (([1], [False]),
                            ([0], [True]))
+    print(f"Inv Gate expectation = {expected_output_inv}")
     INV1 = im.InputNW(inputWeight=[-12], bias=6, idPerceptron='INV 1', activationType='Sigmoid')
 
     table = makeTruthTable(1)
     for index, i in enumerate(table):
-        # output = network.feed_forward(list(i))
         INV1.activate(list(i))
         output = INV1.getOutput()
         print(f'input = {list(i)} and output {output} expected output = {expected_output_inv[index][1]} difference == {expected_output_inv[index][1][0] - output}')
-    print(INV1, '\n' ,INV1.error(expected_output_inv))
+    print(f"The error = {INV1.error(expected_output_inv)} \n")
+
 
 def sigmoidOR():
     expected_output_or = (([1, 1], [True]),
                            ([1, 0], [True]),
                            ([0, 1], [True]),
                            ([0, 0], [False]))
+    print(f"OR Gate expectation = {expected_output_or}")
 
     table = makeTruthTable(2)
     OR1 = im.InputNW(inputWeight=[24, 24], bias=-12, idPerceptron='OR 1', activationType='Sigmoid')
 
     for index, i in enumerate(table):
-        # output = network.feed_forward(list(i))
         OR1.activate(list(i))
         output = OR1.getOutput()
         print(f'input = {list(i)} and output {output} expected output = {expected_output_or[index][1]} difference == {expected_output_or[index][1][0] - output}')
-    print(OR1, '\n' ,OR1.error(expected_output_or))
+    print(f"The error = {OR1.error(expected_output_or)} \n")
 
 
 def sigmoidNOR():
@@ -85,15 +66,15 @@ def sigmoidNOR():
                            ([0, 0, 1], [False]),
                            ([0, 0, 0], [True]))
 
+    print(f"NOR Gate expectation = {expected_output_nor}")
     table = makeTruthTable(3)
     NOR1 = im.InputNW(inputWeight=[-24, -24, -24], bias=12, idPerceptron='NOR 1', activationType='Sigmoid')
 
     for index, i in enumerate(table):
-        # output = network.feed_forward(list(i))
         NOR1.activate(list(i))
         output = NOR1.getOutput()
         print(f'input = {list(i)} and output {output} expected output = {expected_output_nor[index][1]} difference == {expected_output_nor[index][1][0] - output}')
-    print(NOR1, '\n' ,NOR1.error(expected_output_nor))
+    print(f"The error = {NOR1.error(expected_output_nor)} \n")
 
 
 def sigmoidNAND():
@@ -101,16 +82,15 @@ def sigmoidNAND():
                            ([1, 0], [True]),
                            ([0, 1], [True]),
                            ([0, 0], [True]))
+    print(f"NAND Gate expectation = {expected_output_nand}")
     table = makeTruthTable(2)
     NAND1 = im.InputNW(inputWeight=[-12, -12], bias=18, idPerceptron='NAND 1', activationType='Sigmoid')
 
-
     for index, i in enumerate(table):
-        # output = network.feed_forward(list(i))
         NAND1.activate(list(i))
         output = NAND1.getOutput()
         print(f'input = {list(i)} and output {output} expected output = {expected_output_nand[index][1]} difference == {expected_output_nand[index][1][0] - output}')
-    print(NAND1, '\n' ,NAND1.error(expected_output_nand))
+    print(f"The error = {NAND1.error(expected_output_nand)} \n")
 
 
 def sigmoidXOR():
@@ -118,6 +98,7 @@ def sigmoidXOR():
                            ([1, 0], [True]),
                            ([0, 1], [True]),
                            ([0, 0], [False]))
+    print(f"XOR Gate expectation = {expected_output_xor}")
 
     table = makeTruthTable(2)
     OR1 = im.InputNW(inputWeight=[24, 24], bias=-12, idPerceptron='OR 1', activationType='Sigmoid')
@@ -131,16 +112,17 @@ def sigmoidXOR():
 
 
     for index, i in enumerate(table):
-        # output = network.feed_forward(list(i))
         output = networkOneXOR.feed_forward(list(i))
         print(f'input = {list(i)} and output {output} expected output = {expected_output_xor[index][1]} difference == {expected_output_xor[index][1][0] - output[0]}')
-    # print(XOR1, '\n' ,XOR1.error(expected_output_xor))
+    print(f"The error = ... ik heb nog geen functie die de netwerk kwaliteit bepaald maar het is klein :) \n")
+
 
 def sigmoidHalfAdder():
     expected_output_ha = (([1, 1], [False, True]),
                            ([1, 0], [True, False]),
                            ([0, 1], [True, False]),
                            ([0, 0], [False, False]))
+    print(f"Half adder expectation = {expected_output_ha}")
 
     table = makeTruthTable(2)
     OR1 = im.InputNW(inputWeight=[24, 24], bias=-12, idPerceptron='OR 1', activationType='Sigmoid')
@@ -158,18 +140,14 @@ def sigmoidHalfAdder():
     for index, i in enumerate(table):
         output = network.feed_forward(list(i))
         print(f'input = {list(i)} and output {output} expected output = {expected_output_ha[index][1]} difference == {expected_output_ha[index][1][0] - output[0]}')
-    print(network, '\n')
+    print(f"The error = ... ik heb nog geen functie die de netwerk kwaliteit bepaald maar het is klein :) \n")
 
 
 if __name__ == '__main__':
-    """
-    This file is purely for debugging, check the notebook
-    """
-
-    # sigmoidAND()
-    # sigmoidINV()
-    # sigmoidOR()
-    # sigmoidNOR()
-    # sigmoidNAND()
-    # sigmoidXOR()
+    sigmoidAND()
+    sigmoidINV()
+    sigmoidOR()
+    sigmoidNOR()
+    sigmoidNAND()
+    sigmoidXOR()
     sigmoidHalfAdder()
