@@ -1,7 +1,7 @@
 import neuron_mod as input
 
 
-class perceptronLayer:
+class NeuronLayer:
     def __init__(self, inputlist: [input], activationType: str = "Stepper", idLayer: str = "ND"):
         self.inputlist = inputlist
         self.activationType = activationType
@@ -14,7 +14,7 @@ class perceptronLayer:
         """
         outputlist = []
         for perceptron in self.inputlist:
-            outputlist.append(perceptron.getOutput())
+            outputlist.append(perceptron.output)
         return outputlist
 
     def giveInputs(self, inputvaluelist: [float]):
@@ -31,5 +31,5 @@ class perceptronLayer:
         return inputstring
 
     def __str__(self):
-        return f'\n{self.idLayer} perceptron.layer has: \n {self.getInputString()} \n ' \
+        return f'\n{self.idLayer} neuron layer has: \n {self.getInputString()} \n ' \
                f'layer triggers{self.activation_triggers()}'

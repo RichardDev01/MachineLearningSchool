@@ -2,7 +2,7 @@ import neuronLayer_mod as perceptronLayer
 from typing import List
 
 
-class PerceptronNetwork:
+class NeuronNetwork:
     def __init__(self, perceptronLayers: [perceptronLayer]):
         self.perceptronLayers = perceptronLayers
 
