@@ -142,8 +142,7 @@ def sigmoidHalfAdder():
         print(f'input = {list(i)} and output {output} expected output = {expected_output_ha[index][1]} difference == {expected_output_ha[index][1][0] - output[0]}')
     print(f"The error = ... ik heb nog geen functie die de netwerk kwaliteit bepaald maar het is klein :) \n")
 
-
-if __name__ == '__main__':
+def test_gates():
     sigmoidAND()
     sigmoidINV()
     sigmoidOR()
@@ -151,3 +150,10 @@ if __name__ == '__main__':
     sigmoidNAND()
     sigmoidXOR()
     sigmoidHalfAdder()
+
+def test_neuron():
+    AND1 = im.InputNW(inputWeight=[12, 12], bias=-18, idPerceptron='AND 1', activationType='Sigmoid')
+
+if __name__ == '__main__':
+    # test_gates()
+    test_neuron()
