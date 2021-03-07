@@ -78,7 +78,25 @@ def sigmoidAND():
     print(f"The error = {AND1.calc_total_loss(expected_output_and,table)} \n")
 
 
+def sigmoidXOR():
+    expected_output_xor = (([1, 1], [False]),
+                           ([1, 0], [True]),
+                           ([0, 1], [True]),
+                           ([0, 0], [False]))
+    print(f"XOR Gate expectation = {expected_output_xor}")
+
+    table = makeTruthTable(2)
+    OR1 = im.Neuron(inputWeight=[0.2, -0.4], bias=0, idPerceptron='OR 1')
+    NAND1 = im.Neuron(inputWeight=[0.7, 0.1], bias=0, idPerceptron='NAND 1')
+
+    AND1 = im.Neuron(inputWeight=[0.6, 0.9], bias=0, idPerceptron='AND 1')
+
+    layerOneXOR = ptl.NeuronLayer([NAND1, OR1], idLayer='FirstLayer')
+    layerTwoXOR = ptl.NeuronLayer([AND1], idLayer='SecondLayer')
+
+    networkOneXOR = ptn.NeuronNetwork([layerOneXOR, layerTwoXOR])
 
 
 if __name__ == '__main__':
     sigmoidAND()
+    sigmoidXOR()
