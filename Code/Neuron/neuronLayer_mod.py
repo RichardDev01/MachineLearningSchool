@@ -18,6 +18,11 @@ class NeuronLayer:
         return outputlist
 
     def giveInputs(self, inputvaluelist: [float]):
+        """
+        Passes the feedforward function through the layers to the neurons
+        :param inputvaluelist: a set of inputs for the network
+        :return: -
+        """
         for perceptron in self.inputlist:
             perceptron.activate(inputvaluelist)
 

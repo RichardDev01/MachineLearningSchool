@@ -4,6 +4,11 @@ e = 2.71828
 
 
 def sigmoid(z):
+    """
+    This is the sigmoid formula used for the sigmoid activation function
+    :param z: The Z given in the formula given as a Real number
+    :return: Gives back the ouput of the  sigmoid function, a float range from 0 - 1
+    """
     return 1 / (1 + e ** -z)
 
 
@@ -12,7 +17,7 @@ class Neuron:
         self.inputWeight = inputWeight
         self.bias = bias
         self.id = idPerceptron
-        self.output = 0
+        self.output = 0.0
         self.inputvaluelist = []
 
     def activate(self, inputvaluelist: List[float]):
@@ -20,6 +25,7 @@ class Neuron:
         This function sets the Perceptron in action. Give a list of inputs for the perceptron the the output wil be
          calculated
         :param inputvaluelist: A Float list with a set of inputs equal to the amounts of weights of this perceptron
+        :return: Output of the neuron in float
         """
         if len(inputvaluelist) != len(self.inputWeight):
             raise Exception(f"The length input is {len(inputvaluelist)} and is not equal"
@@ -37,6 +43,11 @@ class Neuron:
         return self.output
 
     def error(self, trainset: ([], [])):
+        """
+        This error function wil determin the error of a single Neuron
+        :param trainset: The training set of the neuron, first the input and second the expected output
+        :return: Returns the error in Float value back
+        """
         # MSE = Σ | d – y |^2 / n
         error_sum = 0.0
         for index, example in enumerate(trainset):

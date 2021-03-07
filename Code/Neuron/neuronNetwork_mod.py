@@ -17,7 +17,7 @@ class NeuronNetwork:
 
         return value
 
-    def getlayersInfo(self):
+    def getlayersinfo(self):
         """
         This function is for debuging only, it prints al the inputs of the layers
         """
@@ -27,4 +27,4 @@ class NeuronNetwork:
         return inputstring
 
     def __str__(self):
-        return f'layers = \\/\n{self.getlayersInfo()}'
+        return f'layers = \\/\n{self.getlayersinfo()}'
