@@ -2,7 +2,7 @@ import neuronLayer_mod as perceptronLayer
 from typing import List
 
 
-class PerceptronNetwork:
+class NeuronNetwork:
     def __init__(self, perceptronLayers: [perceptronLayer]):
         self.perceptronLayers = perceptronLayers
 
@@ -17,7 +17,7 @@ class PerceptronNetwork:
 
         return value
 
-    def getlayersInfo(self):
+    def getlayersinfo(self):
         """
         This function is for debuging only, it prints al the inputs of the layers
         """
@@ -27,4 +27,4 @@ class PerceptronNetwork:
         return inputstring
 
     def __str__(self):
-        return f'layers = \\/\n{self.getlayersInfo()}'
+        return f'layers = \\/\n{self.getlayersinfo()}'
