@@ -46,19 +46,32 @@ class Neuron:
 
     def update(self, inputList: [], error, learningRate: float = 0.1):
 
+        #Δwi,j = η ∙ ∂C/∂wi,j = η ∙ outputi ∙ Δj
+        # ∂C /∂wi, j = outputi ∙ Δj
+        #w'i,j = wi,j – Δwi,j
         for index, weight in enumerate(self.inputWeight):
             self.inputWeight[index] -= learningRate * error * inputList[index]
 
+        # Δbj = η ∙ Δj
+        # b'j = bj – Δbj
         self.bias -= learningRate * 1 * error
 
 
     def error(self, inputList: [], target: float):
         activation_value = self.activate(inputList)
+
+        # Δj = σ'(inputj) ∙ –(targetj – outputj)
         error = activation_value * (1-activation_value) * -(target-activation_value)
+
         return error
 
     def backpropagation(self, inputList: [], target: float, learningRate: float = 0.1):
+        # Output neuron error
+        #Δj = σ'(inputj) ∙ –(targetj – outputj)
         error = self.error(inputList, target)
+
+        # Hidden neuron error
+        # Δi = σ'(inputi) ∙ Σj wi,j ∙ Δj
 
         self.update(inputList, error, learningRate)
 
