@@ -13,12 +13,13 @@ def sigmoid(z):
 
 
 class Neuron:
-    def __init__(self, inputWeight: List[float], bias: float = 0, idPerceptron: str = "ND"):
+    def __init__(self, inputWeight: List[float], bias: float = 0,idPerceptron: str = "ND"):
         self.inputWeight = inputWeight
         self.bias = bias
         self.id = idPerceptron
         self.output = 0.0
         self.inputvaluelist = []
+        self.errorNeuron = 0
         self.total_loss = 0
 
     def activate(self, inputvaluelist: List[float]):
@@ -62,8 +63,29 @@ class Neuron:
 
         # Δj = σ'(inputj) ∙ –(targetj – outputj)
         error = activation_value * (1-activation_value) * -(target-activation_value)
-
+        self.errorNeuron = error
         return error
+
+    def error_hidden_layer(self, inputList: [], weightsRights: [], errors: []):
+        # Hidden neuron error
+        # Δi = σ'(inputi) ∙ Σj wi,j ∙ Δj
+
+        #σ'(inputi) = outputj ∙ (1 – outputj)
+        activation_value = self.activate(inputList)
+        activation_value_dx = activation_value * (1-activation_value)
+
+        #Σj wi,j ∙ Δj
+        sum_error = 0
+        for index in range(len(weightsRights)):
+            error = weightsRights[index] * errors[index]
+            sum_error += error
+
+        # Δi = σ'(inputi) ∙ Σj wi,j ∙ Δj
+        calculated_error = activation_value_dx * sum_error
+
+        self.errorNeuron = calculated_error
+
+        return calculated_error
 
     def backpropagation(self, inputList: [], target: float, learningRate: float = 0.1):
         # Output neuron error

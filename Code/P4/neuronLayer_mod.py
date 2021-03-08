@@ -1,11 +1,14 @@
 import neuron_mod as input
-
+from typing import List
 
 class NeuronLayer:
-    def __init__(self, inputlist: [input], activationType: str = "Stepper", idLayer: str = "ND"):
+    def __init__(self, inputlist: [input], isHiddenLayer: bool = False, idLayer: str = "ND"):
         self.inputlist = inputlist
-        self.activationType = activationType
+        self.isHiddenLayer = isHiddenLayer
         self.idLayer = idLayer
+        self.errorList =[]
+        self.weightsright = []
+        self.errorright = []
 
     def activation_triggers(self):
         """
@@ -13,9 +16,17 @@ class NeuronLayer:
         :return:
         """
         outputlist = []
-        for perceptron in self.inputlist:
-            outputlist.append(perceptron.output)
+        for neuron in self.inputlist:
+            outputlist.append(neuron.output)
         return outputlist
+
+
+    def geterrors(self):
+        self.errorList = []
+        for neuron in self.inputlist:
+            # print(f"{neuron.errorNeuron} dsijuhfdashjioa")
+            self.errorList.append(neuron.errorNeuron)
+        return self.errorList
 
     def giveInputs(self, inputvaluelist: [float]):
         """
@@ -23,8 +34,13 @@ class NeuronLayer:
         :param inputvaluelist: a set of inputs for the network
         :return: -
         """
-        for perceptron in self.inputlist:
-            perceptron.activate(inputvaluelist)
+        for neuron in self.inputlist:
+            neuron.activate(inputvaluelist)
+
+    def determin_errors(self, inputvaluelist: List[float], target: float, learningRate: float = 0.1):
+        for neuron in self.inputlist:
+            neuron.backpropagation(inputvaluelist, target, learningRate)
+        self.geterrors()
 
     def getInputString(self):
         """
@@ -35,6 +51,11 @@ class NeuronLayer:
             inputstring = inputstring + (str(inputs))
         return inputstring
 
+    def sethiddenlayer(self):
+        self.isHiddenLayer = True
+
     def __str__(self):
         return f'\n{self.idLayer} neuron layer has: \n {self.getInputString()} \n ' \
+               f'{self.isHiddenLayer=} \n' \
+               f'{self.errorList=} \n' \
                f'layer triggers{self.activation_triggers()}'

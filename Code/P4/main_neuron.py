@@ -78,6 +78,82 @@ def sigmoidAND():
     print(f"The error = {AND1.calc_total_loss(expected_output_and,table)} \n")
 
 
+def sigmoidANDNetwork():
+    """
+    Sigmoid and van het werkboek
+    """
+    expected_output_and = (([1, 1], [True]),
+                       ([1, 0], [False]),
+                       ([0, 1], [False]),
+                       ([0, 0], [False]))[::-1]
+    print(f"And Gate expectation = {expected_output_and}")
+    table = makeTruthTable(2)[::-1]
+    AND1 = im.Neuron(inputWeight=[-0.5, 0.5], bias=1.5, idPerceptron='AND 1')
+
+    layerone = ptl.NeuronLayer([AND1], idLayer='FirstLayer')
+    networkOneAND1 = ptn.NeuronNetwork([layerone])
+
+    # networkOneAND1.backpropagation_network([0, 0], 0, 1)
+    # print(networkOneAND1)
+    # print(networkOneAND1.feed_forward([0, 0]))
+
+    # #Iteratie 1
+    # print("it 1")
+    # AND1.calc_total_loss(expected_output_and, table)
+    # print(AND1)
+    # AND1.backpropagation([0, 0], 0, 1)
+    # AND1.calc_total_loss(expected_output_and, table)
+    # print(AND1)
+    #
+    # # Iteratie 2
+    # print("it 2")
+    # AND1.calc_total_loss(expected_output_and, table)
+    # print(AND1)
+    # AND1.backpropagation([1, 0], 0, 1)
+    # AND1.calc_total_loss(expected_output_and, table)
+    # print(AND1)
+    #
+    # # Iteratie 3
+    # print("it 3")
+    # AND1.calc_total_loss(expected_output_and, table)
+    # print(AND1)
+    # AND1.backpropagation([0, 1], 0, 1)
+    # AND1.calc_total_loss(expected_output_and, table)
+    # print(AND1)
+    #
+    # # Iteratie 4
+    # print("it 4")
+    # AND1.calc_total_loss(expected_output_and, table)
+    # print(AND1)
+    # AND1.backpropagation([1, 1], 1, 1)
+    # AND1.calc_total_loss(expected_output_and, table)
+
+
+    # print(AND1)
+    print("before training")
+    print(networkOneAND1)
+    # for index, i in enumerate(table):
+    #     output = AND1.activate(list(i))
+    #     print(f'input = {list(i)} and output {output} expected output = {expected_output_and[index][1]} difference == {(expected_output_and[index][1][0] - output)**2}')
+    # print(f"The error = {AND1.calc_total_loss(expected_output_and,table)} \n")
+    #
+    #
+    for _ in range(0,1000):
+        for index, i in enumerate(table):
+            # print(f"{index+1} interation")
+            # AND1.calc_total_loss(expected_output_and, table)
+            # print(AND1)
+            # print(f"{list(i)=} and {expected_output_and[index][1][0]=}")
+            networkOneAND1.backpropagation_network(list(i), expected_output_and[index][1][0], 1)
+            # AND1.calc_total_loss(expected_output_and, table)
+            # print(AND1)
+    print("\n\nafter training 1000 epochs and 0.1 learning rate")
+    print(networkOneAND1)
+    # for index, i in enumerate(table):
+    #     output = AND1.activate(list(i))
+    #     print(f'input = {list(i)} and output {output} expected output = {expected_output_and[index][1]} difference == {(expected_output_and[index][1][0] - output)**2}')
+    # print(f"The error = {AND1.calc_total_loss(expected_output_and,table)} \n")
+
 def sigmoidXOR():
     expected_output_xor = (([1, 1], [False]),
                            ([1, 0], [True]),
@@ -95,8 +171,35 @@ def sigmoidXOR():
     layerTwoXOR = ptl.NeuronLayer([AND1], idLayer='SecondLayer')
 
     networkOneXOR = ptn.NeuronNetwork([layerOneXOR, layerTwoXOR])
+    # print(layerOneXOR, layerTwoXOR)
+    networkOneXOR.determinLayerTypes()
+    # print(layerOneXOR, layerTwoXOR)
+    networkOneXOR.feed_forward([1,1])
+
+    print("before training")
+    print(networkOneXOR)
+    # for index, i in enumerate(table):
+    #     output = AND1.activate(list(i))
+    #     print(f'input = {list(i)} and output {output} expected output = {expected_output_and[index][1]} difference == {(expected_output_and[index][1][0] - output)**2}')
+    # print(f"The error = {AND1.calc_total_loss(expected_output_and,table)} \n")
+    #
+    #
+    for _ in range(0, 1000):
+        for index, i in enumerate(table):
+            # print(f"{index+1} interation")
+            # AND1.calc_total_loss(expected_output_and, table)
+            # print(AND1)
+            # print(f"{list(i)=} and {expected_output_and[index][1][0]=}")
+            networkOneXOR.backpropagation_network(list(i), expected_output_xor[index][1][0], 1)
+            # AND1.calc_total_loss(expected_output_and, table)
+            # print(AND1)
+    print("\n\nafter training 1000 epochs and 0.1 learning rate")
+    print(networkOneXOR)
+
+
 
 
 if __name__ == '__main__':
     sigmoidAND()
-    sigmoidXOR()
+    sigmoidANDNetwork()
+    # sigmoidXOR()
