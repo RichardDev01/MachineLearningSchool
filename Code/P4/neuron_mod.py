@@ -20,6 +20,7 @@ class Neuron:
         self.output = 0.0
         self.inputvaluelist = []
         self.errorNeuron = 0
+        self.weighted_delta_left_hidden_layers = []
         self.total_loss = 0
 
     def activate(self, inputvaluelist: List[float]):
@@ -44,11 +45,47 @@ class Neuron:
 
         return self.output
 
+    def update(self, error, learningRate: float = 0.1):
+        # Δj
+        self.errorNeuron = error
 
-    def update(self, inputList: [], error, learningRate: float = 0.1):
+        # w'i,j = wi,j – Δwi,j
+        for index, weight in enumerate(self.inputWeight):
+            self.inputWeight[index] -= learningRate * error * self.inputvaluelist[index]
+
+        # b'j = bj – Δbj
+        self.bias -= learningRate * 1 * error
+
+        #pre Calculat sum for hidden errors Left
+        self.errors_left_hidden_layers()
+
+    def update_hidden_neuron(self, weigth_delta: List, learningRate: float = 0.1):
+        sum_multi_delta = 0
+        for weighted_delta in weigth_delta:
+            sum_multi_delta += weighted_delta
+
+        error = self.output * (1 - self.output) * sum_multi_delta
+        # print(f"this is a hidden uipdate {error}")
+        self.errorNeuron = error
+        for index, weight in enumerate(self.inputWeight):
+            self.inputWeight[index] -= learningRate * error * self.inputvaluelist[index]
+        self.bias -= learningRate * 1 * error
+        self.errors_left_hidden_layers()
+
+
+    def errors_left_hidden_layers(self):
+        #Σj wi,j ∙ Δj
+        self.weighted_delta_left_hidden_layers = []
+        for index, weight in enumerate(self.inputWeight):
+            self.weighted_delta_left_hidden_layers.append(weight * self.errorNeuron)
+        return self.weighted_delta_left_hidden_layers
+
+
+    def update_old(self, inputList: [], error, learningRate: float = 0.1):
 
         #Δwi,j = η ∙ ∂C/∂wi,j = η ∙ outputi ∙ Δj
         # ∂C /∂wi, j = outputi ∙ Δj
+        #dit moet nog gedaan worden
         #w'i,j = wi,j – Δwi,j
         for index, weight in enumerate(self.inputWeight):
             self.inputWeight[index] -= learningRate * error * inputList[index]
@@ -87,13 +124,13 @@ class Neuron:
 
         return calculated_error
 
-    def backpropagation(self, inputList: [], target: float, learningRate: float = 0.1):
-        # Output neuron error
-        #Δj = σ'(inputj) ∙ –(targetj – outputj)
-        error = self.error(inputList, target)
-
-        # Hidden neuron error
-        # Δi = σ'(inputi) ∙ Σj wi,j ∙ Δj
+    def backpropagation(self, inputList: [], target: float, learningRate: float = 0.1, weightsRights: [] = [], errors: [] = []):
+        if len(weightsRights) == 0:
+            # Output neuron error
+            error = self.error(inputList, target)
+        else:
+            # Hidden neuron error
+            error = self.error_hidden_layer(inputList, weightsRights,errors)
 
         self.update(inputList, error, learningRate)
 
@@ -113,5 +150,5 @@ class Neuron:
                f' |{self.inputvaluelist} as input' \
                f' | {self.inputWeight} as weights' \
                f' | {self.bias} as bias' \
-               f' | {self.total_loss} as total loss' \
+               f' | {self.total_loss} as total loss neuron' \
                f' and Output = {self.output}\n '

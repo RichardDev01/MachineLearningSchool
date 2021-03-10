@@ -9,6 +9,7 @@ class NeuronLayer:
         self.errorList =[]
         self.weightsright = []
         self.errorright = []
+        self.hidden_deltas = []
 
     def activation_triggers(self):
         """
@@ -20,6 +21,34 @@ class NeuronLayer:
             outputlist.append(neuron.output)
         return outputlist
 
+    def update_neurons(self, errors: List, learningRate: float = 0.1):
+
+        for index, neuron in enumerate(self.inputlist):
+            neuron.update(errors[index], learningRate)
+
+    def input_weights(self):
+        """
+        This function gets all the activation triggers from the layer and return it in a list
+        :return:
+        """
+        weightslist = []
+        for neuron in self.inputlist:
+            weightslist.append(neuron.inputWeight)
+        return weightslist
+
+    def update_hidden_neurons(self, deltas: List, learningRate: float = 0.1):
+        #[[1,2],[3,4],[5,6] -> [[1,3,5],[2,4,6]]
+        # for index, neuron in enumerate(self.inputlist):
+        # print(f"i'm here! {deltas}")
+        for index, neuron in enumerate(self.inputlist):
+            neuron.update_hidden_neuron(deltas[index], learningRate)
+
+    def get_hidden_delta(self):
+        self.hidden_deltas = []
+        # print(f"--------{self.hidden_deltas}------------------")
+        for neuron in self.inputlist:
+            self.hidden_deltas.append(neuron.weighted_delta_left_hidden_layers)
+        return self.hidden_deltas
 
     def geterrors(self):
         self.errorList = []
