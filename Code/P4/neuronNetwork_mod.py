@@ -1,5 +1,7 @@
 import neuronLayer_mod as neuronLayer
 from typing import List
+import time  # time for training
+import random  # randomizing training epoch
 
 
 def devide_list_sum(x):
@@ -29,10 +31,6 @@ class NeuronNetwork:
             layer.sethiddenlayer()
 
     def backpropagation_network(self, inputvaluelist: List[float], target: List[float], learningRate: float = 0.1):
-        # self.determinLayerTypes()
-        # self.neuronLayers[-1].determin_errors(inputvaluelist,target,learningRate)
-        # for layer in self.neuronLayers[:-1]:
-        #     layer.determin_errors(inputvaluelist,target,learningRate)
         output_error = self.output_layer_difference(inputvaluelist, target)
         for index, layer in enumerate(self.neuronLayers[::-1]):
             if index == 0:
@@ -46,8 +44,6 @@ class NeuronNetwork:
                 # print(distrubeted_values)
                 layer.update_hidden_neurons(distrubeted_values, learningRate)
 
-                pass
-
 
     def output_layer_difference(self, inputvaluelist: List[float], target: List[float]):
         #Δj = σ'(inputj) ∙ –(targetj – outputj)
@@ -60,8 +56,18 @@ class NeuronNetwork:
         # print(delta_outputs)
         return delta_outputs
 
-    def train(self):
-        pass
+    def train(self, possible_inputs: List[float], trainset: ([], []), learningRate: float = 0.1,epochs: int = 1000, time_limit: int = 10):
+        start_time = time.time()
+        for _ in range(0, epochs):
+            random_offset = random.randint(-len(possible_inputs), 0)
+            for index, i in enumerate(possible_inputs):
+                self.backpropagation_network(possible_inputs[index+random_offset], trainset[index+random_offset][1], learningRate)
+            current_time = time.time()
+            lapsed_time = current_time - start_time
+
+            if lapsed_time > time_limit:
+                break
+
 
     def getlayersinfo(self):
         """

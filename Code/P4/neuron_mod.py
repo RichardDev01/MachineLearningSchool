@@ -46,6 +46,8 @@ class Neuron:
         return self.output
 
     def update(self, error, learningRate: float = 0.1):
+
+
         # Δj
         self.errorNeuron = error
 
@@ -150,5 +152,4 @@ class Neuron:
                f' |{self.inputvaluelist} as input' \
                f' | {self.inputWeight} as weights' \
                f' | {self.bias} as bias' \
-               f' | {self.total_loss} as total loss neuron' \
                f' and Output = {self.output}\n '
