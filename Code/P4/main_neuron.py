@@ -19,7 +19,7 @@ def sigmoidAND():
                        ([0, 0], [False]))[::-1]
     print(f"And Gate expectation = {expected_output_and}")
     table = makeTruthTable(2)[::-1]
-    AND1 = im.Neuron(inputWeight=[-0.5, 0.5], bias=1.5, idPerceptron='AND 1')
+    AND1 = im.Neuron(inputWeight=[-0.5, 0.5], bias=1.5, idNeuron='AND 1')
 
 
     # #Iteratie 1
@@ -88,17 +88,17 @@ def sigmoidANDNetwork():
                        ([0, 0], [False, False]))[::-1]
     print(f"And Gate expectation = {expected_output_and}")
     table = makeTruthTable(2)[::-1]
-    AND1 = im.Neuron(inputWeight=[-0.5, 0.5], bias=1.5, idPerceptron='AND 1')
-    AND2 = im.Neuron(inputWeight=[-1, 1], bias=3, idPerceptron='AND 2')
+    AND1 = im.Neuron(inputWeight=[-0.5, 0.5], bias=1.5, idNeuron='AND 1')
+    AND2 = im.Neuron(inputWeight=[-1, 1], bias=3, idNeuron='AND 2')
 
     layerone = ptl.NeuronLayer([AND1,AND2], idLayer='FirstLayer')
     networkOneAND1 = ptn.NeuronNetwork([layerone])
 
     print(networkOneAND1)
-    print(f"total loss = {networkOneAND1.calc_total_loss(expected_output_and, table)}")
-    networkOneAND1.train(table,expected_output_and,1,10000,10)
+    print(f"total loss = {networkOneAND1.calc_total_loss(expected_output_and)}")
+    networkOneAND1.train(expected_output_and,1,10000,10)
     print(networkOneAND1)
-    print(f"total loss = {networkOneAND1.calc_total_loss(expected_output_and, table)}")
+    print(f"total loss = {networkOneAND1.calc_total_loss(expected_output_and)}")
 
 
 def sigmoidXOR():
@@ -109,10 +109,10 @@ def sigmoidXOR():
     print(f"XOR Gate expectation = {expected_output_xor}")
 
     table = makeTruthTable(2)
-    OR1 = im.Neuron(inputWeight=[0.2, -0.4], bias=0, idPerceptron='OR 1')
-    NAND1 = im.Neuron(inputWeight=[0.7, 0.1], bias=0, idPerceptron='NAND 1')
+    OR1 = im.Neuron(inputWeight=[0.2, -0.4], bias=0, idNeuron='OR 1')
+    NAND1 = im.Neuron(inputWeight=[0.7, 0.1], bias=0, idNeuron='NAND 1')
 
-    AND1 = im.Neuron(inputWeight=[0.6, 0.9], bias=0, idPerceptron='AND 1')
+    AND1 = im.Neuron(inputWeight=[0.6, 0.9], bias=0, idNeuron='AND 1')
 
     layerOneXOR = ptl.NeuronLayer([NAND1, OR1], idLayer='FirstLayer')
     layerTwoXOR = ptl.NeuronLayer([AND1], idLayer='SecondLayer')
@@ -124,13 +124,13 @@ def sigmoidXOR():
     for index, i in enumerate(table):
         output = networkOneXOR.feed_forward(list(i))
         print(f'input = {list(i)} and output {output} expected output = {expected_output_xor[index][1]} difference == {expected_output_xor[index][1][0] - output[0]}')
-    print(f"total loss = {networkOneXOR.calc_total_loss(expected_output_xor, table)}\n\n")
-    networkOneXOR.train(table,expected_output_xor,1,10000,10)
+    print(f"total loss = {networkOneXOR.calc_total_loss(expected_output_xor)}\n\n")
+    networkOneXOR.train(expected_output_xor,1,10000,10)
 
     for index, i in enumerate(table):
         output = networkOneXOR.feed_forward(list(i))
         print(f'input = {list(i)} and output {output} expected output = {expected_output_xor[index][1]} difference == {expected_output_xor[index][1][0] - output[0]}')
-    print(f"total loss = {networkOneXOR.calc_total_loss(expected_output_xor, table)}\n\n")
+    print(f"total loss = {networkOneXOR.calc_total_loss(expected_output_xor)}\n\n")
 
 def sigmoidHalfAdder():
     expected_output_ha = (([1, 1], [False, True]),
@@ -140,12 +140,12 @@ def sigmoidHalfAdder():
     print(f"Half adder expectation = {expected_output_ha}")
 
     table = makeTruthTable(2)
-    OR1 = im.Neuron(inputWeight=[0.0, 0.1], bias=0, idPerceptron='OR 1')
-    NAND1 = im.Neuron(inputWeight=[0.2, 0.3], bias=0, idPerceptron='NAND 1')
-    AND1 = im.Neuron(inputWeight=[0.4, 0.5], bias=0, idPerceptron='AND 1')
+    OR1 = im.Neuron(inputWeight=[0.0, 0.1], bias=0, idNeuron='OR 1')
+    NAND1 = im.Neuron(inputWeight=[0.2, 0.3], bias=0, idNeuron='NAND 1')
+    AND1 = im.Neuron(inputWeight=[0.4, 0.5], bias=0, idNeuron='AND 1')
 
-    AND2 = im.Neuron(inputWeight=[0.6, 0.7, 0.8], bias=0, idPerceptron='AND 2')
-    REP1 = im.Neuron(inputWeight=[1.1, 1.2, 1.3], bias=0, idPerceptron='REP 1')
+    AND2 = im.Neuron(inputWeight=[0.6, 0.7, 0.8], bias=0, idNeuron='AND 2')
+    REP1 = im.Neuron(inputWeight=[1.1, 1.2, 1.3], bias=0, idNeuron='REP 1')
 
 
     layer1 = ptl.NeuronLayer([OR1, NAND1, AND1], idLayer='FirstLayer')
@@ -158,7 +158,7 @@ def sigmoidHalfAdder():
         output = network.feed_forward(list(i))
         print(f'input = {list(i)} and output {output} expected output = {expected_output_ha[index][1]}')
 
-    print(f"total loss = {network.calc_total_loss(expected_output_ha, table)}")
+    print(f"total loss = {network.calc_total_loss(expected_output_ha)}")
 
     for _ in range(0, 10000):
         for index, i in enumerate(table):
@@ -168,7 +168,7 @@ def sigmoidHalfAdder():
     for index, i in enumerate(table):
         output = network.feed_forward(list(i))
         print(f'input = {list(i)} and output {output} expected output = {expected_output_ha[index][1]}')
-    print(f"total loss = {network.calc_total_loss(expected_output_ha, table)}")
+    print(f"total loss = {network.calc_total_loss(expected_output_ha)}")
 
 
 def sigmoidHalfAdderTrain():
@@ -179,12 +179,12 @@ def sigmoidHalfAdderTrain():
     print(f"Half adder expectation = {expected_output_ha}")
 
     table = makeTruthTable(2)
-    OR1 = im.Neuron(inputWeight=[0.0, 0.1], bias=0, idPerceptron='OR 1')
-    NAND1 = im.Neuron(inputWeight=[0.2, 0.3], bias=0, idPerceptron='NAND 1')
-    AND1 = im.Neuron(inputWeight=[0.4, 0.5], bias=0, idPerceptron='AND 1')
+    OR1 = im.Neuron(inputWeight=[0.0, 0.1], bias=0, idNeuron='OR 1')
+    NAND1 = im.Neuron(inputWeight=[0.2, 0.3], bias=0, idNeuron='NAND 1')
+    AND1 = im.Neuron(inputWeight=[0.4, 0.5], bias=0, idNeuron='AND 1')
 
-    AND2 = im.Neuron(inputWeight=[0.6, 0.7, 0.8], bias=0, idPerceptron='AND 2')
-    REP1 = im.Neuron(inputWeight=[1.1, 1.2, 1.3], bias=0, idPerceptron='REP 1')
+    AND2 = im.Neuron(inputWeight=[0.6, 0.7, 0.8], bias=0, idNeuron='AND 2')
+    REP1 = im.Neuron(inputWeight=[1.1, 1.2, 1.3], bias=0, idNeuron='REP 1')
 
 
     layer1 = ptl.NeuronLayer([OR1, NAND1, AND1], idLayer='FirstLayer')
@@ -197,15 +197,15 @@ def sigmoidHalfAdderTrain():
         output = network.feed_forward(list(i))
         print(f'input = {list(i)} and output {output} expected output = {expected_output_ha[index][1]}')
 
-    print(f"total loss = {network.calc_total_loss(expected_output_ha, table)}")
+    print(f"total loss = {network.calc_total_loss(expected_output_ha)}")
 
-    network.train(table,expected_output_ha, 1, 10000, 10)
+    network.train(expected_output_ha, 1, 10000, 10)
 
     print("\n\nafter training 10000 epochs and 1 learning rate")
     for index, i in enumerate(table):
         output = network.feed_forward(list(i))
         print(f'input = {list(i)} and output {output} expected output = {expected_output_ha[index][1]}')
-    print(f"total loss = {network.calc_total_loss(expected_output_ha, table)}")
+    print(f"total loss = {network.calc_total_loss(expected_output_ha)}")
     # print(AND2)
 
 if __name__ == '__main__':

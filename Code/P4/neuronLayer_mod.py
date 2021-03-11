@@ -3,11 +3,9 @@ from typing import List
 
 
 class NeuronLayer:
-    def __init__(self, inputlist: [input], isHiddenLayer: bool = False, idLayer: str = "ND"):
+    def __init__(self, inputlist: [input], idLayer: str = "ND"):
         self.inputlist = inputlist
-        self.isHiddenLayer = isHiddenLayer
         self.idLayer = idLayer
-        self.errorList = []
         self.weightsright = []
         self.errorright = []
         self.hidden_deltas = []
@@ -15,7 +13,7 @@ class NeuronLayer:
     def activation_triggers(self):
         """
         This function gets all the activation triggers from the layer and return it in a list
-        :return:
+        :return: list of al the outputs in the layer
         """
         outputlist = []
         for neuron in self.inputlist:
@@ -23,38 +21,32 @@ class NeuronLayer:
         return outputlist
 
     def update_neurons(self, errors: List, learningRate: float = 0.1):
+        """
+        This function updates the output layer neurons with the given error and learning rate
+        @param errors: List of errors sorted on list of neuron
+        @param learningRate: The learning rate for updating the neuron
+        """
         for index, neuron in enumerate(self.inputlist):
             neuron.update(errors[index], learningRate)
 
-    def input_weights(self):
-        """
-        This function gets all the activation triggers from the layer and return it in a list
-        :return:
-        """
-        weightslist = []
-        for neuron in self.inputlist:
-            weightslist.append(neuron.inputWeight)
-        return weightslist
-
     def update_hidden_neurons(self, deltas: List, learningRate: float = 0.1):
-        # [[1,2],[3,4],[5,6] -> [[1,3,5],[2,4,6]]
-        # for index, neuron in enumerate(self.inputlist):
+        """
+        This function updates the hidden layer neurons with the given sum of values and learning rate
+        @param deltas: List of sum of values sorted on list of neuron
+        @param learningRate: The learning rate for updating the neuron
+        """
         for index, neuron in enumerate(self.inputlist):
             neuron.update_hidden_neuron(deltas[index], learningRate)
 
     def get_hidden_delta(self):
+        """
+        This function gets all the calculated sums for the previous hidden layer
+        @return: List of sums of pre calculated values used for the previous hiden layer
+        """
         self.hidden_deltas = []
-        # print(f"--------{self.hidden_deltas}------------------")
         for neuron in self.inputlist:
             self.hidden_deltas.append(neuron.weighted_delta_left_hidden_layers)
         return self.hidden_deltas
-
-    def geterrors(self):
-        self.errorList = []
-        for neuron in self.inputlist:
-            # print(f"{neuron.errorNeuron} dsijuhfdashjioa")
-            self.errorList.append(neuron.errorNeuron)
-        return self.errorList
 
     def give_inputs(self, inputvaluelist: [float]):
         """
@@ -76,6 +68,4 @@ class NeuronLayer:
 
     def __str__(self):
         return f'\n{self.idLayer} neuron layer has: \n {self.get_input_string()} \n ' \
-               f'{self.isHiddenLayer=} \n' \
-               f'{self.errorList=} \n' \
                f'layer triggers{self.activation_triggers()}'
