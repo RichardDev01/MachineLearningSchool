@@ -206,6 +206,7 @@ def sigmoidHalfAdderTrain():
         output = network.feed_forward(list(i))
         print(f'input = {list(i)} and output {output} expected output = {expected_output_ha[index][1]}')
     print(f"total loss = {network.calc_total_loss(expected_output_ha, table)}")
+    # print(AND2)
 
 if __name__ == '__main__':
     # sigmoidAND()

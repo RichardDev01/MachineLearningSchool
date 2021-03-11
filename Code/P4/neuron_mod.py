@@ -13,7 +13,7 @@ def sigmoid(z):
 
 
 class Neuron:
-    def __init__(self, inputWeight: List[float], bias: float = 0,idPerceptron: str = "ND"):
+    def __init__(self, inputWeight: List[float], bias: float = 0, idPerceptron: str = "ND"):
         self.inputWeight = inputWeight
         self.bias = bias
         self.id = idPerceptron
@@ -21,7 +21,6 @@ class Neuron:
         self.inputvaluelist = []
         self.errorNeuron = 0
         self.weighted_delta_left_hidden_layers = []
-        self.total_loss = 0
 
     def activate(self, inputvaluelist: List[float]):
         """
@@ -46,8 +45,6 @@ class Neuron:
         return self.output
 
     def update(self, error, learningRate: float = 0.1):
-
-
         # Δj
         self.errorNeuron = error
 
@@ -58,7 +55,7 @@ class Neuron:
         # b'j = bj – Δbj
         self.bias -= learningRate * 1 * error
 
-        #pre Calculat sum for hidden errors Left
+        # pre Calculat sum for hidden errors Left
         self.errors_left_hidden_layers()
 
     def update_hidden_neuron(self, weigth_delta: List, learningRate: float = 0.1):
@@ -74,28 +71,12 @@ class Neuron:
         self.bias -= learningRate * 1 * error
         self.errors_left_hidden_layers()
 
-
     def errors_left_hidden_layers(self):
-        #Σj wi,j ∙ Δj
+        # Σj wi,j ∙ Δj
         self.weighted_delta_left_hidden_layers = []
         for index, weight in enumerate(self.inputWeight):
             self.weighted_delta_left_hidden_layers.append(weight * self.errorNeuron)
         return self.weighted_delta_left_hidden_layers
-
-
-    def update_old(self, inputList: [], error, learningRate: float = 0.1):
-
-        #Δwi,j = η ∙ ∂C/∂wi,j = η ∙ outputi ∙ Δj
-        # ∂C /∂wi, j = outputi ∙ Δj
-        #dit moet nog gedaan worden
-        #w'i,j = wi,j – Δwi,j
-        for index, weight in enumerate(self.inputWeight):
-            self.inputWeight[index] -= learningRate * error * inputList[index]
-
-        # Δbj = η ∙ Δj
-        # b'j = bj – Δbj
-        self.bias -= learningRate * 1 * error
-
 
     def error(self, inputList: [], target: float):
         activation_value = self.activate(inputList)
@@ -109,11 +90,11 @@ class Neuron:
         # Hidden neuron error
         # Δi = σ'(inputi) ∙ Σj wi,j ∙ Δj
 
-        #σ'(inputi) = outputj ∙ (1 – outputj)
+        # σ'(inputi) = outputj ∙ (1 – outputj)
         activation_value = self.activate(inputList)
         activation_value_dx = activation_value * (1-activation_value)
 
-        #Σj wi,j ∙ Δj
+        # Σj wi,j ∙ Δj
         sum_error = 0
         for index in range(len(weightsRights)):
             error = weightsRights[index] * errors[index]
@@ -126,30 +107,10 @@ class Neuron:
 
         return calculated_error
 
-    def backpropagation(self, inputList: [], target: float, learningRate: float = 0.1, weightsRights: [] = [], errors: [] = []):
-        if len(weightsRights) == 0:
-            # Output neuron error
-            error = self.error(inputList, target)
-        else:
-            # Hidden neuron error
-            error = self.error_hidden_layer(inputList, weightsRights,errors)
-
-        self.update(inputList, error, learningRate)
-
-    def calc_total_loss(self, trainset: ([], []), inputList: []):
-        sum_difference = 0
-        for index, i in enumerate(inputList):
-            output = self.activate(list(i))
-            difference = (trainset[index][1][0] - output) ** 2
-            sum_difference += difference
-        self.total_loss = sum_difference/(2*len(inputList))
-
-        return self.total_loss
-
-
     def __str__(self):
         return f'This is a {self.id} Neuron' \
                f' |{self.inputvaluelist} as input' \
                f' | {self.inputWeight} as weights' \
                f' | {self.bias} as bias' \
+               f' | {self.errorNeuron} as current error' \
                f' and Output = {self.output}\n '

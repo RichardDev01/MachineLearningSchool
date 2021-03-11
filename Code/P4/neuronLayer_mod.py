@@ -1,12 +1,13 @@
 import neuron_mod as input
 from typing import List
 
+
 class NeuronLayer:
     def __init__(self, inputlist: [input], isHiddenLayer: bool = False, idLayer: str = "ND"):
         self.inputlist = inputlist
         self.isHiddenLayer = isHiddenLayer
         self.idLayer = idLayer
-        self.errorList =[]
+        self.errorList = []
         self.weightsright = []
         self.errorright = []
         self.hidden_deltas = []
@@ -22,7 +23,6 @@ class NeuronLayer:
         return outputlist
 
     def update_neurons(self, errors: List, learningRate: float = 0.1):
-
         for index, neuron in enumerate(self.inputlist):
             neuron.update(errors[index], learningRate)
 
@@ -37,9 +37,8 @@ class NeuronLayer:
         return weightslist
 
     def update_hidden_neurons(self, deltas: List, learningRate: float = 0.1):
-        #[[1,2],[3,4],[5,6] -> [[1,3,5],[2,4,6]]
+        # [[1,2],[3,4],[5,6] -> [[1,3,5],[2,4,6]]
         # for index, neuron in enumerate(self.inputlist):
-        # print(f"i'm here! {deltas}")
         for index, neuron in enumerate(self.inputlist):
             neuron.update_hidden_neuron(deltas[index], learningRate)
 
@@ -57,7 +56,7 @@ class NeuronLayer:
             self.errorList.append(neuron.errorNeuron)
         return self.errorList
 
-    def giveInputs(self, inputvaluelist: [float]):
+    def give_inputs(self, inputvaluelist: [float]):
         """
         Passes the feedforward function through the layers to the neurons
         :param inputvaluelist: a set of inputs for the network
@@ -66,12 +65,7 @@ class NeuronLayer:
         for neuron in self.inputlist:
             neuron.activate(inputvaluelist)
 
-    def determin_errors(self, inputvaluelist: List[float], target: float, learningRate: float = 0.1):
-        for neuron in self.inputlist:
-            neuron.backpropagation(inputvaluelist, target, learningRate)
-        self.geterrors()
-
-    def getInputString(self):
+    def get_input_string(self):
         """
         This function is for debuging only, it prints al the inputs of the layers
         """
@@ -80,11 +74,8 @@ class NeuronLayer:
             inputstring = inputstring + (str(inputs))
         return inputstring
 
-    def sethiddenlayer(self):
-        self.isHiddenLayer = True
-
     def __str__(self):
-        return f'\n{self.idLayer} neuron layer has: \n {self.getInputString()} \n ' \
+        return f'\n{self.idLayer} neuron layer has: \n {self.get_input_string()} \n ' \
                f'{self.isHiddenLayer=} \n' \
                f'{self.errorList=} \n' \
                f'layer triggers{self.activation_triggers()}'
