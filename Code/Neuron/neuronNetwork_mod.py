@@ -12,7 +12,7 @@ class NeuronNetwork:
         """
         value = inputvaluelist
         for layer in self.perceptronLayers:
-            layer.giveInputs(value)
+            layer.give_inputs(value)
             value = layer.activation_triggers()
 
         return value
