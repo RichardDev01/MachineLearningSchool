@@ -94,6 +94,6 @@ class MyTestCase(unittest.TestCase):
             np.testing.assert_array_almost_equal(output, i[1], 1)
         print(f"Half adder total loss = {network.calc_total_loss(expected_output_ha)}")
 
+
 if __name__ == '__main__':
     unittest.main()
-
